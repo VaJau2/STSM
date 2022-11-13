@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/Pony.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/characters/strikely.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/PlayerController.gd" type="Script" id=3]
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="camera" type="Camera2D" parent="." index="3"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
