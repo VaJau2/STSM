@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/background/house/room_walls.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/background/house/onlywalls.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/background/house/background_floor.png" type="Texture" id=4]
@@ -9,12 +9,23 @@
 [ext_resource path="res://assets/sprites/background/house/origin/TopDownHouse_FurnitureState2.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/background/house/phone.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/background/house/door.png" type="Texture" id=9]
+[ext_resource path="res://objects/interface/DialogueMenu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 124.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 95.5, 7.5 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends StaticBody2D
+
+
+func interact(_interactor):
+	print(\"interacted with test area\")
+"
+
+[sub_resource type="RectangleShape2D" id=4]
 
 [node name="Scene" type="Node2D"]
 
@@ -139,3 +150,14 @@ texture = ExtResource( 7 )
 flip_h = true
 region_enabled = true
 region_rect = Rect2( 95, 0, 17, 32 )
+
+[node name="test" type="StaticBody2D" parent="YSort"]
+position = Vector2( -78, 39 )
+script = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/test"]
+shape = SubResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueMenu" parent="CanvasLayer" instance=ExtResource( 10 )]

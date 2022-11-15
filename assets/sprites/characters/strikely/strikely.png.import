@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/strikely.png-ade98236007b464835c325179fcf4896.stex"
+path="res://.import/strikely.png-95ef413ba2e8e6f2e0a1cf5f58412209.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/strikely.png"
-dest_files=[ "res://.import/strikely.png-ade98236007b464835c325179fcf4896.stex" ]
+source_file="res://assets/sprites/characters/strikely/strikely.png"
+dest_files=[ "res://.import/strikely.png-95ef413ba2e8e6f2e0a1cf5f58412209.stex" ]
 
 [params]
 
