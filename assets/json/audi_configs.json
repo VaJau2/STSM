@@ -1,0 +1,24 @@
+{
+	"mother": {
+		"sounds": {
+			"0": "beeps2/sound_a.wav",
+			"1": "beeps2/sound_e.wav",
+			"2": "beeps2/sound_i.wav",
+			"3": "beeps2/sound_o.wav",
+		},
+		"min_pitch": "1.5",
+		"max_pitch": "2",
+		"chars_to_sound": "3",
+	},
+	"coronel": {
+		"sounds": {
+			"0": "beeps2/sound_a.wav",
+			"1": "beeps2/sound_o.wav",
+			"2": "beeps2/sound_u.wav",
+			"3": "beeps2/sound_y.wav",
+		},
+		"min_pitch": "0.6",
+		"max_pitch": "1.6",
+		"chars_to_sound": "4",
+	}
+}

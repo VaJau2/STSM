@@ -10,19 +10,30 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "AudiConfig",
+"language": "GDScript",
+"path": "res://assets/scripts/interface/dialogue/AudiConfig.gd"
+}, {
+"base": "Node",
 "class": "PlayerStates",
 "language": "GDScript",
-"path": "res://assets/scripts/Player/PlayerStates.gd"
+"path": "res://assets/scripts/player/PlayerStates.gd"
 } ]
 _global_script_class_icons={
+"AudiConfig": "",
 "PlayerStates": ""
 }
 
 [application]
 
 config/name="Strikely's Top Secret Mission"
+run/main_scene="res://scenes/Room.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+G="*res://assets/scripts/system/Global.gd"
 
 [display]
 
