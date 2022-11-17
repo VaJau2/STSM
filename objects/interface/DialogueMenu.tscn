@@ -73,4 +73,5 @@ __meta__ = {
 }
 
 [node name="audi" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 script = ExtResource( 5 )

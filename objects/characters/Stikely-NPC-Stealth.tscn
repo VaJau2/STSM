@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/characters/base/WalkingPony.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/characters/strikely/strikely-stealth.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/strikely/strikely_mouth.png" type="Texture" id=3]
+
+[node name="Strikely" instance=ExtResource( 1 )]
+code = "strikely"
+speed = 90
+start_animation = "idle"
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="mouth" parent="." index="2"]
+texture = ExtResource( 3 )

@@ -14,7 +14,9 @@ var timer = 0.03
 var nodes = {}
 var may_continue = false
 var may_exit = false
+
 signal next_node
+signal finished
 
 
 func start_dialogue(file) -> void:
@@ -26,6 +28,10 @@ func show_node(node) -> void:
 	if node < nodes.size():
 		visible = true
 		var temp_node = nodes[str(node)]
+		var node_timer = temp_node["timer"] if temp_node.has("timer") else timer
+		var character = null
+		if temp_node.has("character"):
+			character = G.find_character(temp_node["character"])
 		
 		if temp_node.has("config_code"):
 			audi.set_config(temp_node.config_code)
@@ -33,24 +39,31 @@ func show_node(node) -> void:
 			audi.set_config(null)
 		
 		name_label.text = temp_node.name
-		label.text = temp_node.text
-		label.percent_visible = 0
+		label.text = ""
+		var count = 0
+		var count_target = temp_node.text.length()
 		
-		while label.percent_visible < 1:
-			label.visible_characters += 1
-			var last_letter = get_last_letter()
-			audi.play_dialogue_sound(label.visible_characters, last_letter)
-			yield(get_tree().create_timer(timer), "timeout")
+		while count < count_target:
+			var new_symbol = temp_node.text[count]
+			label.text += new_symbol
+			var temp_timer = get_timer(node_timer, new_symbol)
+			audi.play_dialogue_sound(count, new_symbol, character)
+			count += 1
+			yield(get_tree().create_timer(temp_timer), "timeout")
 		
 		set_may_continue(true)
 		yield(self, "next_node")
 		show_node(node + 1)
 	else:
 		visible = false
+		emit_signal("finished")
 
 
-func get_last_letter() -> String:
-	return label.text[label.visible_characters - 1]
+func get_timer(node_timer, new_symbol):
+	match new_symbol:
+		".", "!", "?": return node_timer + 0.4
+		",": return node_timer + 0.1
+		_: return node_timer
 
 
 func set_may_continue(may) -> void:
@@ -58,10 +71,11 @@ func set_may_continue(may) -> void:
 	may_continue = may
 
 
+func _ready():
+	G.dialogue = self
+
+
 func _process(_delta) -> void:
 	if may_continue && Input.is_action_just_pressed("ui_space"):
 		set_may_continue(false)
 		emit_signal("next_node")
-	
-	if Input.is_action_just_pressed("ui_interact"):
-		start_dialogue("start_dialogue")

@@ -33,11 +33,14 @@ func set_config(code) -> void:
 		saved_configs.erase(last_key)
 
 
-func play_dialogue_sound(visible_chars, symbol) -> void:
+func play_dialogue_sound(visible_chars, symbol, character) -> void:
 	if config == null: return
+	if symbol == ".": return
 	if visible_chars % config.chars_to_sound == 0:
 		choose_sound(symbol)
 		play()
+		if character != null:
+			character.animate_mouth(0.05)
 
 
 func choose_sound(symbol) -> void:

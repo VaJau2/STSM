@@ -1,20 +1,17 @@
-extends KinematicBody2D
+extends Character
 
 #--------------------------------
 # Отвечает за передвижения игрока
 #--------------------------------
-
 
 export var speed = 120
 export var run_speed = 200
 export var crouch_speed = 60
 export var acceleration = 800
 
-var velocity = Vector2()
 var dir = Vector2()
 
 onready var states: PlayerStates = get_node("states")
-onready var anim = get_node("anim")
 
 
 func update_keys() -> void:
@@ -38,11 +35,6 @@ func update_keys() -> void:
 		
 		if Input.is_action_just_pressed("ui_crouch"):
 			states.toggle_crouching()
-
-
-func set_flip_x(flipOn: bool) -> void:
-	$sprite.flip_h = flipOn
-	$mouth.flip_h = flipOn
 
 
 func update_velocity(delta: float) -> void:
@@ -70,11 +62,6 @@ func get_current_animation() -> String:
 		state.running: return "run" if is_moving else "idle"
 		state.walking: return "walk" if is_moving else "idle"
 		_: return "idle"
-
-
-func change_animation(new_animation: String) -> void:
-	if anim.current_animation != new_animation:
-		anim.current_animation = new_animation
 
 
 func _process(delta) -> void:

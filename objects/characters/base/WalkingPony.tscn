@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/characters/base/Pony.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/characters/WalkingPony.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.99998
+height = 8.00004
+
+[node name="Pony" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+speed = 80
+
+[node name="shape" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="agent2d" type="NavigationAgent2D" parent="." index="5"]

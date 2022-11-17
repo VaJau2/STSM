@@ -1,5 +1,11 @@
 extends Node
 
+var dialogue = null
+
+
+func _ready():
+	randomize()
+
 
 func parse_json_data(file, folder = "") -> Dictionary:
 	var path = "res://assets/json/"
@@ -18,3 +24,12 @@ func parse_json_data(file, folder = "") -> Dictionary:
 	assert(parsed_data.error == OK, "error reading json dialogue file in path: " + path)
 	
 	return parsed_data.result
+
+
+func find_character(code: String) -> Character:
+	var characters = get_tree().get_nodes_in_group("characters")
+	for character in characters:
+		if character.code == code:
+			return character
+	push_error("could not find character named " + code)
+	return null

@@ -3,15 +3,17 @@
 		"name": "Единорожка",
 		"text": "Да?",
 		"config_code": "mother",
+		"character": "mother",
 	},
 	"1": {
 		"name": "Голос в телефоне",
 		"text": "Добрый вечер, мэм. Можно ли вашу дочь к телефону?",
-		"config_code": "coronel",
+		"config_code": "coronel_phone",
 	},
 	"2": {
 		"name": "Единорожка",
 		"text": "Да, она сейчас подойдет.",
 		"config_code": "mother",
+		"character": "mother",
 	},
 }

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sound_u.wav-de0941d11dae851cb2e3164d860e4024.sample"
+
+[deps]
+
+source_file="res://assets/audio/dialogue/beeps2_phone/sound_u.wav"
+dest_files=[ "res://.import/sound_u.wav-de0941d11dae851cb2e3164d860e4024.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

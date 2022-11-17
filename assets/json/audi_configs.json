@@ -10,15 +10,25 @@
 		"max_pitch": "2",
 		"chars_to_sound": "3",
 	},
-	"coronel": {
+	"coronel_phone": {
+		"sounds": {
+			"0": "beeps2_phone/sound_a.wav",
+			"1": "beeps2_phone/sound_o.wav",
+			"2": "beeps2_phone/sound_u.wav",
+		},
+		"min_pitch": "0.8",
+		"max_pitch": "1.3",
+		"chars_to_sound": "5",
+	},
+	"strikely": {
 		"sounds": {
 			"0": "beeps2/sound_a.wav",
-			"1": "beeps2/sound_o.wav",
-			"2": "beeps2/sound_u.wav",
-			"3": "beeps2/sound_y.wav",
+			"1": "beeps2/sound_i.wav",
+			"2": "beeps2/sound_e.wav",
+			"3": "beeps2/sound_o.wav",
 		},
-		"min_pitch": "0.6",
-		"max_pitch": "1.6",
+		"min_pitch": "1",
+		"max_pitch": "2",
 		"chars_to_sound": "4",
-	}
+	},
 }

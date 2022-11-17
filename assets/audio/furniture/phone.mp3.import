@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/phone.mp3-2aaa3878bdf7ade15b771ded1059fb7c.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/furniture/phone.mp3"
+dest_files=[ "res://.import/phone.mp3-2aaa3878bdf7ade15b771ded1059fb7c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
