@@ -281,6 +281,12 @@ text = "Нажмите пробел, чтобы начать игру"
 align = 1
 valign = 1
 
+[node name="background" type="ColorRect" parent="Canvas"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+
 [node name="Scenario" type="Node" parent="."]
 script = ExtResource( 12 )
 mother_path = NodePath("../YSort/Mother")

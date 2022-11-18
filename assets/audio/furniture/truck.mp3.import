@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/truck.mp3-ed5cdcd1ae738c1d01a9bee1136ef102.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/furniture/truck.mp3"
+dest_files=[ "res://.import/truck.mp3-ed5cdcd1ae738c1d01a9bee1136ef102.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

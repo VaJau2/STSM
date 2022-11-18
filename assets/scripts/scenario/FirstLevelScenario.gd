@@ -39,7 +39,7 @@ func start_game():
 	start_label.visible = false
 	phone.set_ring(true)
 	yield(get_tree().create_timer(3), "timeout")
-	
+
 	#приходит желтая пня
 	door.open()
 	shadows.set_open(true)
@@ -47,33 +47,33 @@ func start_game():
 	yield(mother, "arrived")
 	phone.set_ring(false)
 	phone.set_open(true)
-	
+
 	#запускается первый диалог
-	G.dialogue.start_dialogue("start_dialogue")
+	G.dialogue.start_dialogue("start")
 	yield(G.dialogue, "finished")
-	
+
 	#желтая пня уходит
 	phone.set_open(false)
 	mother.set_target(start_pos)
 	yield(mother, "arrived")
 	mother.queue_free()
 	yield(get_tree().create_timer(3), "timeout")
-	
+
 	#приходит страйкли
 	strikely.set_target(target.position)
 	yield(strikely, "arrived")
 	door.close()
 	shadows.set_open(false)
-	
+
 	phone.set_open(true)
 	yield(get_tree().create_timer(1), "timeout")
-	
+
 	#запускается второй диалог
-	G.dialogue.start_dialogue("start_dialogue2")
+	G.dialogue.start_dialogue("start2")
 	yield(G.dialogue, "finished")
 	phone.set_open(false)
 	yield(get_tree().create_timer(1), "timeout")
-	
+
 	#страйкли уходит
 	door.open()
 	shadows.set_open(true)
@@ -82,3 +82,7 @@ func start_game():
 	strikely.queue_free()
 	door.close()
 	shadows.set_open(false)
+	
+	#переход на следующую сцену
+	yield(get_tree().create_timer(2), "timeout")
+	G.goto_scene("Road")

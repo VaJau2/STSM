@@ -1,10 +1,13 @@
 extends Node
 
 var dialogue = null
+var current_scene = null
 
 
 func _ready():
 	randomize()
+	var root = get_tree().get_root()
+	current_scene = root.get_child(root.get_child_count() - 1)
 
 
 func parse_json_data(file, folder = "") -> Dictionary:
@@ -33,3 +36,21 @@ func find_character(code: String) -> Character:
 			return character
 	push_error("could not find character named " + code)
 	return null
+
+
+func goto_scene(scene):
+	var background = get_node_or_null("/root/Scene/Canvas/background")
+	if background != null:
+		background.visible = true
+		while background.color.a < 1:
+			background.color.a += 0.01
+			yield(get_tree(), "idle_frame")
+	call_deferred("_deferred_goto_scene", "res://scenes/" + scene + ".tscn")
+
+
+func _deferred_goto_scene(path):
+	current_scene.free()
+	var s = ResourceLoader.load(path)
+	current_scene = s.instance()
+	get_tree().get_root().add_child(current_scene)
+	get_tree().set_current_scene(current_scene)
