@@ -14,6 +14,7 @@ var timer = 0.03
 var nodes = {}
 var may_continue = false
 var may_exit = false
+var skip = false
 
 signal next_node
 signal finished
@@ -27,6 +28,7 @@ func start_dialogue(file) -> void:
 func show_node(node) -> void:
 	if node < nodes.size():
 		visible = true
+		skip = false
 		var temp_node = nodes[str(node)]
 		var node_timer = temp_node["timer"] if temp_node.has("timer") else timer
 		var character = null
@@ -44,12 +46,16 @@ func show_node(node) -> void:
 		var count_target = temp_node.text.length()
 		
 		while count < count_target:
-			var new_symbol = temp_node.text[count]
-			label.text += new_symbol
-			var temp_timer = get_timer(node_timer, new_symbol)
-			audi.play_dialogue_sound(count, new_symbol, character)
-			count += 1
-			yield(get_tree().create_timer(temp_timer), "timeout")
+			if skip:
+				label.text = temp_node.text
+				count = count_target
+			else:
+				var new_symbol = temp_node.text[count]
+				label.text += new_symbol
+				count += 1
+				audi.play_dialogue_sound(count, new_symbol, character)
+				var temp_timer = get_timer(node_timer, new_symbol)
+				yield(get_tree().create_timer(temp_timer), "timeout")
 		
 		set_may_continue(true)
 		yield(self, "next_node")
@@ -76,6 +82,9 @@ func _ready():
 
 
 func _process(_delta) -> void:
-	if may_continue && Input.is_action_just_pressed("ui_space"):
-		set_may_continue(false)
-		emit_signal("next_node")
+	if Input.is_action_just_pressed("ui_space"):
+		if may_continue:
+			set_may_continue(false)
+			emit_signal("next_node")
+		else:
+			skip = true
