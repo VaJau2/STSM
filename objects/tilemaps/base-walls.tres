@@ -1,0 +1,61 @@
+[gd_resource type="TileSet" load_steps=6 format=2]
+
+[ext_resource path="res://assets/sprites/background/forest/BaseWalls.png" type="Texture" id=1]
+
+[sub_resource type="OccluderPolygon2D" id=11]
+polygon = PoolVector2Array( 1.05649, 51.4461, 1.05649, 46.1187, 0.869568, 39.2958, 2.64539, 40.3239, 2.92578, 51.9135, 4.88852, 51.9135, 5.35583, 40.5109, 6.10355, 38.5481, 6.94472, 51.82, 9.00092, 51.82, 9.46823, 39.9501, 10.4029, 39.6697, 10.8702, 52.2873, 12.4591, 52.0069, 13.6741, 39.7632, 14.3284, 39.0155, 15.3565, 53.3154, 0.869568, 53.3154 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 16, 52.8481, 0, 53.035, 0, 13.0325, 16, 13.126 )
+
+[sub_resource type="OccluderPolygon2D" id=12]
+polygon = PoolVector2Array( 0.539841, 45.0666, 0.864365, 52.985, 3.00626, 52.985, 3.20096, 44.9368, 4.82361, 45.0017, 4.8885, 52.7903, 7.0304, 52.7903, 6.96548, 45.0666, 8.97754, 45.2613, 8.97754, 53.05, 11.1843, 52.9202, 11.1194, 44.9368, 13.1964, 45.1315, 12.9368, 52.9202, 14.7541, 52.9202, 14.9489, 45.1315, 15.9873, 45.1315, 15.9224, 42.73, 14.6892, 42.9247, 13.9753, 37.0832, 12.9368, 42.73, 10.7949, 43.1194, 9.4968, 37.2779, 9.04245, 42.8598, 6.96548, 42.7949, 5.86209, 37.2779, 5.14813, 42.9247, 3.26587, 43.0545, 1.57832, 37.3428, 0.799469, 43.1194, 0.0855103, 43.3141 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 16, 53.0578, 0.0283966, 53.0578, 0, 12.9618, 16, 13.0552 )
+
+[resource]
+0/name = "fence1"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 144, 48, 16, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 11 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 9 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "fence1"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 144, 112, 16, 64 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/occluder = SubResource( 12 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 10 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow_road.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/characters/Stikely-NPC-Stealth.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/sprites/background/truck/truck_wheel.png" type="Texture" id=4]
 [ext_resource path="res://assets/scripts/scenario/SecondLevelScenario.gd" type="Script" id=5]
 [ext_resource path="res://objects/interface/DialogueMenu.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/scripts/interface/dialogue/DialogueMenu.gd" type="Script" id=7]
 [ext_resource path="res://assets/audio/furniture/truck.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/sprites/background/truck/shadows.png" type="Texture" id=9]
 
@@ -219,11 +218,7 @@ script = ExtResource( 5 )
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="DialogueMenu" type="Control" parent="Canvas" instance=ExtResource( 6 )]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 7 )
+[node name="DialogueMenu" parent="Canvas" instance=ExtResource( 6 )]
 
 [node name="background" type="ColorRect" parent="Canvas"]
 anchor_right = 1.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/strikely-stealth.png-2c0e646a700a6155420bdb2cbda20445.stex"
+path="res://.import/tree1_open.png-160d63b63cb018f8efadb133dc19a388.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/strikely/strikely-stealth.png"
-dest_files=[ "res://.import/strikely-stealth.png-2c0e646a700a6155420bdb2cbda20445.stex" ]
+source_file="res://assets/sprites/background/forest/trees/tree1_open.png"
+dest_files=[ "res://.import/tree1_open.png-160d63b63cb018f8efadb133dc19a388.stex" ]
 
 [params]
 

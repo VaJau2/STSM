@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/strikely_mouth.png-f5e69e2d0da209e29f75ea4c44e34271.stex"
+path="res://.import/truck-closed.png-df54f539becf741c30f97c1148858b93.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/strikely/strikely_mouth.png"
-dest_files=[ "res://.import/strikely_mouth.png-f5e69e2d0da209e29f75ea4c44e34271.stex" ]
+source_file="res://assets/sprites/background/truck/truck-closed.png"
+dest_files=[ "res://.import/truck-closed.png-df54f539becf741c30f97c1148858b93.stex" ]
 
 [params]
 

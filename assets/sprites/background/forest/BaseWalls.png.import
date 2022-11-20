@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mother-mouth.png-161ab604431866d13d5f7e80464b44b1.stex"
+path="res://.import/BaseWalls.png-55f196fc5f1fe22eba639b9f2d01db3f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/mother/mother-mouth.png"
-dest_files=[ "res://.import/mother-mouth.png-161ab604431866d13d5f7e80464b44b1.stex" ]
+source_file="res://assets/sprites/background/forest/BaseWalls.png"
+dest_files=[ "res://.import/BaseWalls.png-55f196fc5f1fe22eba639b9f2d01db3f.stex" ]
 
 [params]
 

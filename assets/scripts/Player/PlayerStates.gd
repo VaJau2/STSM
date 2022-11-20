@@ -30,5 +30,9 @@ func set_running(run) -> void:
 	moving_state = moving_states.walking
 
 
+func is_running() -> bool:
+	return moving_state == moving_states.running
+
+
 func may_move() -> bool:
 	return moving_state != moving_states.none

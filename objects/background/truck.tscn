@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/background/truck/truck_wheel.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/background/truck/truck-closed.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 82.5, 27 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 79, 21, 58, 21, 54, 15, 40, 15, 36, 21, -45, 21, -50, 15, -64, 15, -70, 23, -78, 23, -78, 14, -84, 4, -84, -22, -63, -38, 33, -39, 41, -25, 75, -18, 84, 1, 84, 13 )
+
+[node name="truck" type="StaticBody2D"]
+position = Vector2( -64, 270 )
+scale = Vector2( -1, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="TruckWheel" type="Sprite" parent="Sprite"]
+position = Vector2( 24.7826, 16.5217 )
+texture = ExtResource( 1 )
+offset = Vector2( -1.30434, -3.04347 )
+
+[node name="TruckWheel2" type="Sprite" parent="Sprite"]
+position = Vector2( -27.3913, 16.9565 )
+texture = ExtResource( 1 )
+offset = Vector2( -1.30434, -3.04347 )
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( -3, 9 )
+shape = SubResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 2 )

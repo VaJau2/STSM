@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IceTileset.png-cb68a4963c877e9750b874452dddd6b6.stex"
+path="res://.import/Fox Sprite Sheet.png-bc0f056f0cca0ab905b364b6c94e2c53.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background/forest/IceTileset.png"
-dest_files=[ "res://.import/IceTileset.png-cb68a4963c877e9750b874452dddd6b6.stex" ]
+source_file="res://assets/sprites/characters/animals/Fox Sprite Sheet.png"
+dest_files=[ "res://.import/Fox Sprite Sheet.png-bc0f056f0cca0ab905b364b6c94e2c53.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

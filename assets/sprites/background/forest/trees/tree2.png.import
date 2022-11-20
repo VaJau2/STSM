@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/base_mouth.png-320c46e73729aa705698a1456d697724.stex"
+path="res://.import/tree2.png-44c0c544c1284f44ee9c5f58cc4d4c92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/base_mouth.png"
-dest_files=[ "res://.import/base_mouth.png-320c46e73729aa705698a1456d697724.stex" ]
+source_file="res://assets/sprites/background/forest/trees/tree2.png"
+dest_files=[ "res://.import/tree2.png-44c0c544c1284f44ee9c5f58cc4d4c92.stex" ]
 
 [params]
 

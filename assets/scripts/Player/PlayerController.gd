@@ -8,10 +8,15 @@ export var speed = 120
 export var run_speed = 200
 export var crouch_speed = 60
 export var acceleration = 800
+export var default_land_material = "snow"
 
 var dir = Vector2()
 
 onready var states: PlayerStates = get_node("states")
+
+
+func is_running() -> bool:
+	return states.is_running()
 
 
 func update_keys() -> void:
@@ -62,6 +67,10 @@ func get_current_animation() -> String:
 		state.running: return "run" if is_moving else "idle"
 		state.walking: return "walk" if is_moving else "idle"
 		_: return "idle"
+
+
+func _ready() -> void:
+	$soundSteps.land_material = default_land_material
 
 
 func _process(delta) -> void:
