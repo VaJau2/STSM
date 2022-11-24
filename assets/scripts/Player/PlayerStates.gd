@@ -34,5 +34,9 @@ func is_running() -> bool:
 	return moving_state == moving_states.running
 
 
+func is_crouching() -> bool:
+	return moving_state == moving_states.crouching
+
+
 func may_move() -> bool:
 	return moving_state != moving_states.none

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tree4.png-5982a76f9154cab91d6d6877c5a86838.stex"
+path="res://.import/hangar.png-fb7c13867251c5e515211191893fe8bf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background/forest/trees/tree4.png"
-dest_files=[ "res://.import/tree4.png-5982a76f9154cab91d6d6877c5a86838.stex" ]
+source_file="res://assets/sprites/background/base/hangar.png"
+dest_files=[ "res://.import/hangar.png-fb7c13867251c5e515211191893fe8bf.stex" ]
 
 [params]
 

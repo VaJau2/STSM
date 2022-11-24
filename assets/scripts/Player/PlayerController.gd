@@ -19,6 +19,10 @@ func is_running() -> bool:
 	return states.is_running()
 
 
+func is_crouching() -> bool:
+	return states.is_crouching()
+
+
 func update_keys() -> void:
 	dir = Vector2.ZERO
 	

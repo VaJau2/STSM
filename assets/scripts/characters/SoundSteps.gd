@@ -9,8 +9,12 @@ const STEP_RUN_COOLDOWN = 0.55
 
 const STEP_SOUNDS_COUNT = 3
 
+const NORMAL_VOLUME = 1.5
+const CROUCH_VOLUME = -1.5
+
 var timer = 0
 var stepI = 0
+var is_crouching = false
 
 var land_material = "wood"
 onready var parent: Character = get_parent()
@@ -30,6 +34,10 @@ export var stepsRunArray = {
 }
 
 
+func get_volume():
+	return CROUCH_VOLUME if parent.is_crouching() else NORMAL_VOLUME
+
+
 func set_land_material(new_material: String):
 	if new_material.empty(): return
 	land_material = new_material
@@ -41,12 +49,15 @@ func _process(delta):
 		if timer > 0:
 			timer -= delta
 		else:
+			volume_db = get_volume()
+			
 			if parent.is_running():
 				stream = stepsRunArray[land_material][stepI]
 				timer = STEP_RUN_COOLDOWN
 			else:
 				stream = stepsArray[land_material][stepI]
 				timer = STEP_COOLDOWN
+			
 			play()
 			
 			var oldI = stepI

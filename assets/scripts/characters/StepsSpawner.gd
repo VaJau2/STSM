@@ -17,7 +17,6 @@ var hide_onetime = false
 var step_prefab = preload("res://objects/characters/step.tscn")
 
 
-
 func _ready():
 	steps_parent = get_node_or_null("/root/Scene/steps_parent")
 	if steps_parent == null:

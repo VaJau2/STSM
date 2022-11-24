@@ -11,7 +11,9 @@ export var code: String
 onready var anim = get_node("anim")
 onready var mouth = get_node("mouth")
 onready var item_sprite = get_node("item")
+onready var sound_steps = get_node("soundSteps")
 
+var land_material = "snow"
 var velocity: Vector2
 var flip_x: bool
 
@@ -21,11 +23,19 @@ func is_running() -> bool:
 
 
 func is_on_snow() -> bool:
-	return true
+	return land_material == "snow"
 
 
 func is_hiding() -> bool:
 	return false
+
+
+func is_crouching() -> bool:
+	return false
+
+
+func set_land_material(material: String):
+	land_material = material
 
 
 func animate_mouth(time = 0):
