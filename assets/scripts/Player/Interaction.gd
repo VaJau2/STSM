@@ -5,7 +5,7 @@ var interact_objects = []
 
 
 func _on_interaction_body_entered(body):
-	if body.has_method("interact"):
+	if body.has_method("interact") && body.may_interact == true:
 		interact_objects.append(body)
 		update_hint()
 

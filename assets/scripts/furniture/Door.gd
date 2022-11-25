@@ -9,6 +9,7 @@ export var opened = false
 onready var sprite: Sprite = get_node("Door")
 onready var audi: AudioStreamPlayer2D = get_node("audi")
 var closed: bool = true
+var may_interact = true
 
 
 func _ready():

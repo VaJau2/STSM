@@ -9,13 +9,14 @@ class_name Character
 
 export var code: String
 onready var anim = get_node("anim")
-onready var mouth = get_node("mouth")
-onready var item_sprite = get_node("item")
-onready var sound_steps = get_node("soundSteps")
+onready var mouth = get_node_or_null("mouth")
+onready var item_sprite = get_node_or_null("item")
+onready var sound_steps = get_node_or_null("soundSteps")
 
 var land_material = "snow"
 var velocity: Vector2
 var flip_x: bool
+var may_move: bool = true
 
 
 func is_running() -> bool:

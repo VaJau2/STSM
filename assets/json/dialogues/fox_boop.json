@@ -1,0 +1,12 @@
+{
+	"0": {
+		"name": "Лис",
+		"text": "*буп*",
+	},
+	"1": {
+		"name": "Страйкли",
+		"text": "Эй!",
+		"config_code": "strikely",
+		"character": "strikely",
+	},
+}

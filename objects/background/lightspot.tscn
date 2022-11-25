@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/light/spotlight.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/background/base/lightspot.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/light/lightspot-light.png" type="Texture" id=3]
+
+[node name="lightspot" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+texture_scale = 0.6
+color = Color( 1, 0.992157, 0.807843, 1 )
+energy = 0.6
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_buffer_size = 1024
+shadow_gradient_length = 2.0
+shadow_filter = 1
+shadow_filter_smooth = 20.0
+
+[node name="Light2D2" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+color = Color( 0.890196, 0.843137, 0.701961, 1 )

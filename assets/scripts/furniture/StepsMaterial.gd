@@ -11,9 +11,9 @@ export var default_material = "snow"
 
 func _on_body_entered(body):
 	if body is Character:
-		body.sound_steps.set_land_material(material_code)
+		body.set_land_material(material_code)
 
 
 func _on_body_exited(body):
 	if body is Character:
-		body.sound_steps.set_land_material(default_material)
+		body.set_land_material(default_material)

@@ -4,6 +4,8 @@ extends Character
 # Отвечает за передвигающихся через навигацию персонажей
 #-----------------------------------------------
 
+class_name WalkingPony
+
 onready var agent = get_node("agent2d")
 export var speed = 80
 export var start_animation = "idle"
@@ -28,6 +30,9 @@ func set_target(target: Vector2):
 
 
 func update_moving():
+	if !may_move:
+		change_animation(start_animation)
+		return
 	var move_dir = position.direction_to(agent.get_next_location())
 	velocity = move_dir * speed
 	agent.set_velocity(velocity)

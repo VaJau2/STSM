@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "PlayerStates",
 "language": "GDScript",
 "path": "res://assets/scripts/player/PlayerStates.gd"
+}, {
+"base": "Character",
+"class": "WalkingPony",
+"language": "GDScript",
+"path": "res://assets/scripts/characters/WalkingPony.gd"
 } ]
 _global_script_class_icons={
 "AudiConfig": "",
 "Character": "",
-"PlayerStates": ""
+"PlayerStates": "",
+"WalkingPony": ""
 }
 
 [application]
@@ -124,6 +130,10 @@ ui_space={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[mono]
+
+project/assembly_name="Strikely's Top Secret Mission"
 
 [physics]
 
