@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/sprites/characters/ponies/base.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/characters/ponies/base_mouth.png" type="Texture" id=2]
@@ -28,7 +28,6 @@
 [ext_resource path="res://assets/sprites/characters/ponies/pony_shadow.png" type="Texture" id=26]
 [ext_resource path="res://assets/sprites/light/flashlight.png" type="Texture" id=27]
 [ext_resource path="res://assets/sprites/items/flashlight.png" type="Texture" id=28]
-[ext_resource path="res://assets/scripts/player/FlashlightSpot.gd" type="Script" id=29]
 [ext_resource path="res://assets/scripts/characters/StepsSpawner.gd" type="Script" id=30]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -496,7 +495,6 @@ vframes = 7
 [node name="light_spot" type="Node2D" parent="."]
 visible = false
 position = Vector2( 8, -24 )
-script = ExtResource( 29 )
 __meta__ = {
 "_edit_group_": true
 }

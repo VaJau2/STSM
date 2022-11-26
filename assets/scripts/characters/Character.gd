@@ -3,6 +3,7 @@ extends KinematicBody2D
 #--------------------------------
 # Базовый класс персонажей
 # отвечает за анимацию говорения в диалогах
+# и за функции состояния, которые переопределяются в дочерних классах
 #--------------------------------
 
 class_name Character
@@ -58,3 +59,8 @@ func set_flip_x(flip_on: bool) -> void:
 func change_animation(new_animation: String) -> void:
 	if anim.current_animation != new_animation:
 		anim.current_animation = new_animation
+
+
+func _physics_process(_delta) -> void:
+	if (velocity.length() > 0):
+		velocity = move_and_slide(velocity)

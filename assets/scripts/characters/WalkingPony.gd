@@ -19,7 +19,7 @@ func _ready():
 	change_animation(start_animation)
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	if has_target:
 		update_moving()
 
@@ -33,9 +33,6 @@ func update_moving():
 	if !may_move:
 		change_animation(start_animation)
 		return
-	var move_dir = position.direction_to(agent.get_next_location())
-	velocity = move_dir * speed
-	agent.set_velocity(velocity)
 	
 	if agent.is_navigation_finished():
 		change_animation("idle")
@@ -43,9 +40,11 @@ func update_moving():
 		velocity = Vector2.ZERO
 		has_target = false
 	else:
+		var move_dir = position.direction_to(agent.get_next_location())
+		velocity = move_dir * speed
+		agent.set_velocity(velocity)
 		look_at_direction(move_dir)
 		change_animation("walk")
-		velocity = move_and_slide(velocity)
 
 
 func look_at_direction(direction: Vector2):

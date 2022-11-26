@@ -1,0 +1,9 @@
+{
+	"flashlight": {
+		"name": "Фонарь",
+		"desc": "Освещает твой путь в темноте, но немножко выдает твою позицию противнику",
+		"icon": "flashlight",
+		"prefab": "flashlight",
+		"texture": "flashlight",
+	},
+}

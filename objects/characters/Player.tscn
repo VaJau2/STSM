@@ -29,9 +29,7 @@ texture = ExtResource( 5 )
 
 [node name="item" parent="." index="4"]
 visible = true
-
-[node name="light_spot" parent="." index="5"]
-visible = true
+texture = null
 
 [node name="camera" type="Camera2D" parent="." index="6"]
 current = true

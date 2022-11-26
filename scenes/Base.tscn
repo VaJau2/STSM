@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow_road.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/scripts/furniture/StepsMaterial.gd" type="Script" id=18]
 [ext_resource path="res://objects/characters/animals/Bunny.tscn" type="PackedScene" id=19]
 [ext_resource path="res://objects/characters/animals/Crow.tscn" type="PackedScene" id=20]
+[ext_resource path="res://objects/interface/Inventory.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 214, 33 )
@@ -518,6 +519,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 script = SubResource( 8 )
+
+[node name="Inventory" parent="Canvas" instance=ExtResource( 21 )]
+player_path = NodePath("../../YSort/Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.176471, 0.176471, 0.188235, 1 )

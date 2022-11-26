@@ -1,5 +1,11 @@
 extends Character
 
+#--------------------------------
+# Класс ворона
+# Реализован через отдельный класс, т.к. не использует навигацию
+# и летает сквозь коллизию
+#--------------------------------
+
 const SPEED = 300
 const ARRIVE_DISTANCE = 10
 
@@ -29,16 +35,12 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	if is_flying:
+		update_moving()
 		return
 	elif idle_timer > 0:
 		idle_timer -= delta
 	else:
 		get_new_state()
-
-
-func _physics_process(_delta) -> void:
-	if is_flying:
-		update_moving()
 
 
 func get_new_state() -> void:
@@ -74,7 +76,6 @@ func update_moving() -> void:
 	if !may_move:
 		change_animation("idle")
 		return
-	var move_dir = position.direction_to(flying_target)
 
 	if is_arrived():
 		change_animation("idle")
@@ -82,10 +83,10 @@ func update_moving() -> void:
 		velocity = Vector2.ZERO
 		is_flying = false
 	else:
+		var move_dir = position.direction_to(flying_target)
 		look_at_direction(move_dir)
 		change_animation("fly")
 		velocity = move_dir * SPEED
-		velocity = move_and_slide(velocity)
 
 
 func look_at_direction(direction: Vector2) -> void:

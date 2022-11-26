@@ -85,8 +85,3 @@ func _ready() -> void:
 func _process(delta) -> void:
 	update_keys()
 	update_velocity(delta)
-
-
-func _physics_process(_delta) -> void:
-	if (velocity.length() > 0):
-		velocity = move_and_slide(velocity)
