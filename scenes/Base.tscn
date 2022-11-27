@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow_road.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://objects/characters/animals/Bunny.tscn" type="PackedScene" id=19]
 [ext_resource path="res://objects/characters/animals/Crow.tscn" type="PackedScene" id=20]
 [ext_resource path="res://objects/interface/Inventory.tscn" type="PackedScene" id=21]
+[ext_resource path="res://objects/interface/MiniMap.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 214, 33 )
@@ -87,6 +88,13 @@ extents = Vector2( 11.5, 1499.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13, 1257.25 )
+
+[sub_resource type="GDScript" id=29]
+script/source = "extends Node2D
+
+
+var minimap_icon = \"mission\"
+"
 
 [sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 1394, -1631, 1567, -1467, 1323, -1464, 1152, -1463, 1061, -1466, 1323, -1631, 259, 722, 998, 715, 1230, 716, 257, 765, 164, 185, 166, 134, 1688, 130, 1769, 131, 1534, 192, 1060, 213, 1393, -1462, 976, 463, 1026, 465, 1516, 493, 1508, 668, 1454, 668, 1229, 663, 74, 637, 74, 582, 1873, -1930, 1877, -2092, 1875, -787, 942, 714, 1871, -1858, -315, 875, 1456, 706, 1508, 706, 1623, 774, 1618, 854, 1413, -13, 1743, -29, 1786, -29, 1767, 76, 1688, 78, 1410, 18, 904, 334, 944, 334, 394, 397, 396, 358, 775, 337, 786, 19, 1366, 16, 783, 66, 397, 3, 918, -7, 733, 19, 1147, 711, 1072, -1723, 383, -1855, 1392, -1722, 1324, -1718, 1152, -1719, 645, -176, 38, -365, 879, -545, 1679, -601, 1789, -63, 1745, -64, 737, -1310, 1321, -1373, 1391, -1373, 1567, -1369, 1128, -1165, 863, -1169, 265, -524, 830, -548, 947, 292, 1062, 262, 1105, 259, 1538, 240, 1588, 241, 1558, 453, 1515, 453, 1024, 427, -175, 482, -172, 436, 81, 428, 134, 435, -6, 584, 1874.61, -682.237, 1871, 450, 1827, 454, 1561, 494, 1824, 521, 1743, 778, 123, -1803, 129, -1053, 83, -1050, -65, -1160, -175, -1361, -172, -1416, 69, -1804, 1573, -1719, 893, -1721, 340, -2074, 337, -606, 256, -578, 190, -575, 130, -1008, 1572, -1632, 1749, -787, 1673, -821, 194, -521, 34, -425, 119, -1844, -48, -422, -69, -1096, 83, -1007, -150, -1158, -244, -1361, 1749, -681, 1673, -717, 1429, -822, 1126, -966, 1589, 195, 1872, 517, 1872, 852, 1732, 852, 1107, 220, 879, -581, 829, -580, 776, 286, 30, 328, 31, 242, 114, 187, 139, 383, 348, 357, 347, 396, 78, 384, -158, 325, 1678, -686, 493, -683, 495, -761, 1428, -721, 1366, -20, 965, -9, 961, -52, 1149, 663, -204, 697, -207, 734, -318, 71, -243, 72, -217, 483, 640, -119, 1059, -1374, 1152, -1373, 200, 718, 202, 763, -165, 732, -166, 698, -4, 635, 896, -1373, 898, -1468, 737, -1526, 894, -1632, 386, -760, 467, -1311, 1068, -1634, 1150, -1632, 905, 293, 832, 333, 827, 289, 942, 677, 384, -1932, 382, -2073, 996, 675, 976, 430, -239, -20, -316, -24, -332, -2077, 736, 65, 306, 5, 468, -1529, -217, 432, 863, -964, -152, -1098, 70, -1848, -245, -1411, 307, -50, 114, 131, 578, -175, -49, -365, 579, -123, 394, -57, -161, 238, 917, -51 )
@@ -497,6 +505,10 @@ dialogue_code = "fox_boop"
 position = Vector2( 415, 434 )
 random_points_path = [ NodePath("../../random_points/3"), NodePath("../../random_points/6"), NodePath("../../random_points/7"), NodePath("../../random_points/9") ]
 
+[node name="target" type="Node2D" parent="YSort" groups=["minimap_object"]]
+position = Vector2( 798, -1584 )
+script = SubResource( 29 )
+
 [node name="Crow" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1559, 409 )
 code = "crow"
@@ -513,6 +525,16 @@ __meta__ = {
 
 [node name="DialogueMenu" parent="Canvas" instance=ExtResource( 13 )]
 
+[node name="MiniMap" parent="Canvas" instance=ExtResource( 22 )]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -267.0
+margin_top = 14.0
+margin_right = -63.0
+margin_bottom = 170.0
+player_path = NodePath("../../YSort/Player")
+
 [node name="background" type="ColorRect" parent="Canvas"]
 visible = false
 anchor_right = 1.0
@@ -521,10 +543,11 @@ color = Color( 0, 0, 0, 1 )
 script = SubResource( 8 )
 
 [node name="Inventory" parent="Canvas" instance=ExtResource( 21 )]
+pause_mode = 2
 player_path = NodePath("../../YSort/Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.176471, 0.176471, 0.188235, 1 )
+color = Color( 0.247059, 0.247059, 0.282353, 1 )
 
 [connection signal="body_entered" from="materials/road" to="materials/road" method="_on_body_entered"]
 [connection signal="body_exited" from="materials/road" to="materials/road" method="_on_body_exited"]

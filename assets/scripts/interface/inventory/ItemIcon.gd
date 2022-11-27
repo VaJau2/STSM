@@ -36,7 +36,6 @@ func set_item(code: String) -> void:
 func set_active(make_active: bool) -> void:
 	active = make_active
 	update_borders_color()
-	parent.select_item(item_data if active else {})
 
 
 func update_borders_color(hover: bool = false) -> void:
@@ -67,3 +66,4 @@ func _on_ItemIcon_gui_input(event):
 	if !(event is InputEventMouseButton) || !event.pressed: return
 	if item_code.empty(): return
 	set_active(!active)
+	parent.select_item(self, item_data if active else {})

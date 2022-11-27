@@ -13,6 +13,7 @@ onready var item_desc = get_node("back/back2/ItemDesc")
 export var player_path: NodePath
 
 var player = null
+var active_icon = null
 var active_item_prefab = null
 var hidden: bool = true
 var may_change: bool = true
@@ -30,8 +31,11 @@ func get_item_data(item_code: String) -> Dictionary:
 	return items_data[item_code]
 
 
-func select_item(item_data: Dictionary) -> void:
+func select_item(icon, item_data: Dictionary) -> void:
 	var player_item = player.get_node("item")
+	
+	if active_icon != null: active_icon.set_active(false)
+	active_icon = null
 	
 	if active_item_prefab != null:
 		active_item_prefab.destroy()
@@ -41,9 +45,13 @@ func select_item(item_data: Dictionary) -> void:
 		player_item.texture = null
 		return
 	
+	active_icon = icon
 	if item_data.has("texture"):
 		var texture = load("res://assets/sprites/items/" + item_data.texture + ".png")
 		player_item.texture = texture
+	else:
+		player_item.texture = null
+	
 	if item_data.has("prefab"):
 		var prefab = load("res://objects/item_prefabs/" + item_data.prefab + ".tscn")
 		active_item_prefab = prefab.instance()
@@ -62,6 +70,7 @@ func show_item_data(item_code: String) -> void:
 
 
 func set_hidden(make_hidden: bool) -> void:
+	get_tree().paused = !make_hidden
 	hidden = make_hidden
 	if !make_hidden: 
 		back.visible = true

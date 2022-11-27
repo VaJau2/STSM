@@ -93,7 +93,7 @@ tracks/0/keys = {
 [sub_resource type="OccluderPolygon2D" id=8]
 polygon = PoolVector2Array( -7, 1, -4, -8, 7, -8, 11, 1 )
 
-[node name="Bunny" type="KinematicBody2D"]
+[node name="Bunny" type="KinematicBody2D" groups=["minimap_object"]]
 script = ExtResource( 1 )
 code = "bunny"
 idle_animations = PoolStringArray( "idle", "sleep", "idle1" )

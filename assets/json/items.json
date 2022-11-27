@@ -6,4 +6,10 @@
 		"prefab": "flashlight",
 		"texture": "flashlight",
 	},
+	"navigator": {
+		"name": "Навигатор",
+		"desc": "Направит тебя в нужном направлении и покажет, где находятся враги",
+		"icon": "navigator",
+		"prefab": "navigator",
+	}
 }

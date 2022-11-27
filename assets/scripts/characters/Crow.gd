@@ -16,6 +16,7 @@ const MAX_IDLE = 10
 
 export (Array, NodePath) var random_points_path
 export var follow_target_path: NodePath
+export var minimap_icon: String = "animal"
 var follow_target: Character
 
 var random_points: Array

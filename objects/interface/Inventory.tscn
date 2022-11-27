@@ -133,6 +133,7 @@ item_code = "flashlight"
 margin_left = 90.0
 margin_right = 176.0
 margin_bottom = 87.0
+item_code = "navigator"
 
 [node name="ItemIcon3" parent="back/back2/GridContainer" instance=ExtResource( 2 )]
 margin_left = 180.0

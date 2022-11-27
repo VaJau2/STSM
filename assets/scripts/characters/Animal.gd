@@ -12,6 +12,7 @@ const WALK_CHANCE = 0.5
 export (Array, NodePath) var random_points_path
 export var idle_animations: PoolStringArray
 export var dialogue_code: String
+export var minimap_icon: String = "animal"
 
 var may_interact: bool setget , is_may_interact
 var random_points: Array

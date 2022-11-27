@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/interface/map/map-front.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/interface/map/map-back.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/interface/map/map-loading.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/interface/map/marker-enemy.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/interface/map/marker-animal.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/interface/map/marker-mission.png" type="Texture" id=6]
+[ext_resource path="res://assets/scripts/interface/MiniMap.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/loading:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 96.6667, 5.83333 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "update"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/loading:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 96, 5 ), Vector2( 96, 5 ), Vector2( 96, 140 ) ]
+}
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends AnimationPlayer
+
+func _ready():
+	current_animation = \"update\"
+"
+
+[node name="MiniMap" type="MarginContainer"]
+margin_right = 204.0
+margin_bottom = 156.0
+rect_scale = Vector2( 1.2, 1.2 )
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 7 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 199.0
+margin_bottom = 151.0
+rect_clip_content = true
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="back" type="TextureRect" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 184.0
+margin_bottom = 136.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+
+[node name="loading" type="Sprite" parent="MarginContainer"]
+position = Vector2( 96.6667, 5.83333 )
+texture = ExtResource( 3 )
+
+[node name="animal" type="Sprite" parent="MarginContainer"]
+visible = false
+position = Vector2( 80, 52.5 )
+texture = ExtResource( 5 )
+
+[node name="enemy" type="Sprite" parent="MarginContainer"]
+visible = false
+position = Vector2( 128.333, 89.1667 )
+texture = ExtResource( 4 )
+
+[node name="mission" type="Sprite" parent="MarginContainer"]
+visible = false
+position = Vector2( 153.333, 25 )
+texture = ExtResource( 6 )
+
+[node name="player_pos" type="Node2D" parent="MarginContainer"]
+position = Vector2( 97, 73 )
+
+[node name="Frame" type="NinePatchRect" parent="."]
+modulate = Color( 0.462745, 0.462745, 0.462745, 1 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 199.0
+margin_bottom = 151.0
+texture = ExtResource( 1 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/update = SubResource( 2 )
+script = SubResource( 3 )
