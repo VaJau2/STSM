@@ -1,5 +1,9 @@
 extends MarginContainer
 
+#--------------------------------
+# Отвечает за отображение мини-карты
+#--------------------------------
+
 const OFFSET = 15
 
 export var player_path: NodePath
@@ -38,7 +42,6 @@ func update_marker(item) -> void:
 
 
 func _ready():
-	set_process(false)
 	player = get_node(player_path)
 	var viewport_zoom = get_viewport_rect().size * zoom
 	grid_scale = grid.rect_size / viewport_zoom
@@ -52,5 +55,9 @@ func _ready():
 
 
 func _process(_delta):
+	if Input.is_action_just_pressed("ui_navigator"):
+		visible = !visible
+	
+	if !visible: return
 	for item in markers:
 		update_marker(item)

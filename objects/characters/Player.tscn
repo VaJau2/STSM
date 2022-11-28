@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://objects/characters/base/Pony.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/ponies/strikely/strikely-stealth.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/scripts/player/Interaction.gd" type="Script" id=6]
 [ext_resource path="res://assets/materials/fonts/pixel-theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sprites/interface/keyIcon.png" type="Texture" id=8]
+[ext_resource path="res://assets/scripts/player/PlayerItems.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5, 10 )
@@ -30,6 +31,9 @@ texture = ExtResource( 5 )
 [node name="item" parent="." index="4"]
 visible = true
 texture = null
+script = ExtResource( 9 )
+light_spot_path = NodePath("../light_spot")
+audi_path = NodePath("../items")
 
 [node name="camera" type="Camera2D" parent="." index="6"]
 current = true
@@ -66,6 +70,8 @@ theme = ExtResource( 7 )
 text = "E"
 align = 1
 valign = 1
+
+[node name="items" type="AudioStreamPlayer2D" parent="." index="13"]
 
 [connection signal="body_entered" from="interaction" to="interaction" method="_on_interaction_body_entered"]
 [connection signal="body_exited" from="interaction" to="interaction" method="_on_interaction_body_exited"]

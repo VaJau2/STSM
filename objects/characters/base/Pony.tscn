@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://assets/sprites/characters/ponies/base.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/characters/ponies/base_mouth.png" type="Texture" id=2]
@@ -32,6 +32,17 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends Node2D
+
+
+func _process(_delta):
+	if !visible: return
+	var mouse_pos = get_global_mouse_position()
+	look_at(mouse_pos)
+	rotation_degrees = clamp(rotation_degrees, -60, 60)
+"
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -495,6 +506,7 @@ vframes = 7
 [node name="light_spot" type="Node2D" parent="."]
 visible = false
 position = Vector2( 8, -24 )
+script = SubResource( 11 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -20,7 +20,7 @@
 [ext_resource path="res://assets/scripts/furniture/StepsMaterial.gd" type="Script" id=18]
 [ext_resource path="res://objects/characters/animals/Bunny.tscn" type="PackedScene" id=19]
 [ext_resource path="res://objects/characters/animals/Crow.tscn" type="PackedScene" id=20]
-[ext_resource path="res://objects/interface/Inventory.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/sprites/characters/ponies/guard.png" type="Texture" id=21]
 [ext_resource path="res://objects/interface/MiniMap.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=9]
@@ -509,6 +509,12 @@ random_points_path = [ NodePath("../../random_points/3"), NodePath("../../random
 position = Vector2( 798, -1584 )
 script = SubResource( 29 )
 
+[node name="Guard" type="Sprite" parent="YSort"]
+position = Vector2( 1197, -924 )
+texture = ExtResource( 21 )
+hframes = 8
+vframes = 7
+
 [node name="Crow" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1559, 409 )
 code = "crow"
@@ -526,7 +532,6 @@ __meta__ = {
 [node name="DialogueMenu" parent="Canvas" instance=ExtResource( 13 )]
 
 [node name="MiniMap" parent="Canvas" instance=ExtResource( 22 )]
-visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -267.0
@@ -536,15 +541,10 @@ margin_bottom = 170.0
 player_path = NodePath("../../YSort/Player")
 
 [node name="background" type="ColorRect" parent="Canvas"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 script = SubResource( 8 )
-
-[node name="Inventory" parent="Canvas" instance=ExtResource( 21 )]
-pause_mode = 2
-player_path = NodePath("../../YSort/Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.247059, 0.247059, 0.282353, 1 )
