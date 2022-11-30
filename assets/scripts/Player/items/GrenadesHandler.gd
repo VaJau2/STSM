@@ -1,0 +1,35 @@
+extends Node2D
+
+onready var grenades_parent = get_node("/root/Scene/YSort")
+var grenade_prefab = preload("res://objects/grenade.tscn")
+
+var is_on: bool = false
+var start_speed = 250
+
+
+func set_on(on: bool) -> void:
+	is_on = on
+	set_process(on)
+
+
+func _ready() -> void:
+	set_on(false)
+
+
+func get_dir() -> Vector2:
+	var mouse_pos = get_global_mouse_position()
+	return global_position.direction_to(mouse_pos) * 250
+
+
+func spawn_grenade(dir: Vector2) -> void:
+		var grenade = grenade_prefab.instance()
+		grenades_parent.add_child(grenade)
+		grenade.global_position = global_position
+		grenade.linear_velocity = dir
+		grenade.angular_velocity = rand_range(20, 50)
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("mouse_0"):
+		var dir = get_dir()
+		spawn_grenade(dir)
