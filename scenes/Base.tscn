@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow_road.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=2]
@@ -22,6 +22,10 @@
 [ext_resource path="res://objects/characters/animals/Crow.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/sprites/characters/ponies/guard.png" type="Texture" id=21]
 [ext_resource path="res://objects/interface/MiniMap.tscn" type="PackedScene" id=22]
+[ext_resource path="res://objects/interface/GrenadesCount.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/sprites/interface/after_grenade.png" type="Texture" id=24]
+[ext_resource path="res://assets/audio/items/grenade_close.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/scripts/player/items/AfterGrenadeEffect.gd" type="Script" id=26]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 214, 33 )
@@ -111,6 +115,75 @@ func _ready():
 		yield(get_tree(), \"idle_frame\")
 	visible = false
 "
+
+[sub_resource type="Shader" id=30]
+code = "shader_type canvas_item;
+
+uniform float lod: hint_range(0.0, 5) = 0.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = SubResource( 30 )
+shader_param/lod = 4.0
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 4.0, 4.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Scene" type="Node2D"]
 
@@ -540,11 +613,42 @@ margin_right = -63.0
 margin_bottom = 170.0
 player_path = NodePath("../../YSort/Player")
 
+[node name="GrenadesCount" parent="Canvas" instance=ExtResource( 23 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -34.0
+margin_top = -81.0
+margin_right = -9.0
+margin_bottom = -27.0
+
 [node name="background" type="ColorRect" parent="Canvas"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 script = SubResource( 8 )
+
+[node name="AfterGrenade" type="ColorRect" parent="Canvas"]
+visible = false
+material = SubResource( 31 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 26 )
+
+[node name="ColorRect" type="TextureRect" parent="Canvas/AfterGrenade"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 24 )
+expand = true
+
+[node name="audi" type="AudioStreamPlayer" parent="Canvas/AfterGrenade"]
+stream = ExtResource( 25 )
+
+[node name="anim" type="AnimationPlayer" parent="Canvas/AfterGrenade"]
+anims/RESET = SubResource( 32 )
+anims/show = SubResource( 33 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.247059, 0.247059, 0.282353, 1 )

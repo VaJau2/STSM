@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grenade.png-e602e6b957a3bee235d963a8c7aa3976.stex"
+path="res://.import/explode.png-663752aec04abd12e9c29785867faab2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/grenade.png"
-dest_files=[ "res://.import/grenade.png-e602e6b957a3bee235d963a8c7aa3976.stex" ]
+source_file="res://assets/sprites/items/grenade/explode.png"
+dest_files=[ "res://.import/explode.png-663752aec04abd12e9c29785867faab2.stex" ]
 
 [params]
 

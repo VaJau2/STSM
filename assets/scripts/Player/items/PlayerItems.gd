@@ -12,7 +12,7 @@ var flashlight: Texture = preload("res://assets/sprites/items/flashlight.png")
 var flashlight_on: bool = false
 var light_handler = null
 
-var grenade: Texture = preload("res://assets/sprites/items/grenade_item.png")
+var grenade: Texture = preload("res://assets/sprites/items/grenade/grenade_item.png")
 var grenade_on: bool = false
 var grenade_handler = null
 
@@ -25,6 +25,7 @@ func set_flashlight_on(on: bool) -> void:
 
 
 func set_grenade_on(on: bool) -> void:
+	if grenade_handler.grenades_count <= 0 and on: return
 	if flashlight_on: set_flashlight_on(false)
 	grenade_on = on
 	texture = grenade if on else null

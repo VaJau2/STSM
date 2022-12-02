@@ -9,7 +9,14 @@ class_name PlayerStates
 
 
 var moving_state = moving_states.walking
-enum moving_states {none, walking, running, crouching}
+enum moving_states {none, walking, running, crouching, stunned}
+
+
+func set_stunned(stun: bool) -> void:
+	if stun:
+		moving_state = moving_states.stunned
+	else:
+		moving_state = moving_states.none
 
 
 func toggle_crouching() -> void:
@@ -19,7 +26,7 @@ func toggle_crouching() -> void:
 		moving_state = moving_states.crouching
 
 
-func set_running(run) -> void:
+func set_running(run: bool) -> void:
 	if run:
 		moving_state = moving_states.running
 		return
@@ -39,4 +46,4 @@ func is_crouching() -> bool:
 
 
 func may_move() -> bool:
-	return moving_state != moving_states.none
+	return moving_state != moving_states.stunned

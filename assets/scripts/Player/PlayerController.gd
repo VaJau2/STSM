@@ -13,6 +13,15 @@ export var default_land_material = "snow"
 var dir = Vector2()
 
 onready var states: PlayerStates = get_node("states")
+onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
+
+
+func stun():
+	if grenade_effects:
+		states.set_stunned(true)
+		grenade_effects.show()
+		yield(grenade_effects, "done")
+		states.set_stunned(false)
 
 
 func is_running() -> bool:
@@ -72,6 +81,7 @@ func get_current_animation() -> String:
 	var is_moving = dir.length() > 0
 	
 	match states.moving_state:
+		state.stunned: return "stunned"
 		state.crouching: return "crouch" if is_moving else "crouch-idle"
 		state.running: return "run" if is_moving else "idle"
 		state.walking: return "walk" if is_moving else "idle"

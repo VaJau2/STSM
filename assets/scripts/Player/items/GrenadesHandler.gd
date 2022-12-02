@@ -1,6 +1,10 @@
 extends Node2D
 
+export var grenades_count = 8
+
 onready var grenades_parent = get_node("/root/Scene/YSort")
+onready var grenades_count_label = get_node("/root/Scene/Canvas/GrenadesCount")
+onready var items_handler = get_node("../item")
 var grenade_prefab = preload("res://objects/grenade.tscn")
 
 var is_on: bool = false
@@ -14,6 +18,7 @@ func set_on(on: bool) -> void:
 
 func _ready() -> void:
 	set_on(false)
+	show_grenades_count()
 
 
 func get_dir() -> Vector2:
@@ -22,14 +27,26 @@ func get_dir() -> Vector2:
 
 
 func spawn_grenade(dir: Vector2) -> void:
-		var grenade = grenade_prefab.instance()
-		grenades_parent.add_child(grenade)
-		grenade.global_position = global_position
-		grenade.linear_velocity = dir
-		grenade.angular_velocity = rand_range(20, 50)
+	var grenade = grenade_prefab.instance()
+	grenades_parent.add_child(grenade)
+	grenade.global_position = global_position
+	grenade.linear_velocity = dir
+	grenade.angular_velocity = rand_range(20, 50)
+	
+
+
+func show_grenades_count() -> void:
+	grenades_count_label.grenades_count_change(grenades_count)
 
 
 func _process(_delta: float) -> void:
+	if grenades_count <= 0:
+		items_handler.set_grenade_on(false)
+		set_process(false)
+		return
+	
 	if Input.is_action_just_pressed("mouse_0"):
 		var dir = get_dir()
 		spawn_grenade(dir)
+		grenades_count -= 1
+		show_grenades_count()
