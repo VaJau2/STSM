@@ -3,6 +3,9 @@ extends RigidBody2D
 const AIR_FRICTION = 1.02
 const MIN_SPEED = 20
 const EXPLODE_TIME = 3
+const PLAYER_CHECK_STUN_DISTANCE = 65
+
+onready var ray: RayCast2D = get_node("ray")
 
 var timer: float
 var victims: Array
@@ -21,9 +24,33 @@ func explode() -> void:
 	$audi.play()
 	$explode.visible = true
 	for victim in victims:
-		victim.stun()
+		if may_stun_victim(victim): victim.stun()
 	yield(get_tree().create_timer(0.3), "timeout")
 	queue_free()
+
+
+func may_stun_victim(victim: Character) -> bool:
+	if !raycast_see_victim(victim): return false
+	if victim.name == "Player":
+		var distance = global_position.distance_to(victim.global_position)
+		if distance < PLAYER_CHECK_STUN_DISTANCE: return true
+		
+		if victim.global_position.x > global_position.x:
+			return victim.flip_x
+		else:
+			return !victim.flip_x
+	return true
+
+
+func raycast_see_victim(victim: Character) -> bool:
+	var dir = victim.global_position - global_position
+	ray.rotation = -rotation 
+	ray.cast_to = dir
+	ray.enabled = true
+	ray.force_raycast_update()
+	var result = ray.is_colliding() && ray.get_collider() == victim
+	ray.enabled = false
+	return result
 
 
 func _process(delta: float) -> void:

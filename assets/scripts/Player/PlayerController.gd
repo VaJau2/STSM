@@ -39,6 +39,7 @@ func set_land_material(material: String):
 
 func update_keys() -> void:
 	dir = Vector2.ZERO
+	may_move = states.may_move()
 	
 	if states.may_move():
 		if Input.is_action_pressed("ui_up"):

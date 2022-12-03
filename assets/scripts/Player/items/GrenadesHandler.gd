@@ -1,11 +1,17 @@
 extends Node2D
 
 export var grenades_count = 8
+export var audi_path: NodePath
 
 onready var grenades_parent = get_node("/root/Scene/YSort")
 onready var grenades_count_label = get_node("/root/Scene/Canvas/GrenadesCount")
 onready var items_handler = get_node("../item")
+onready var player = get_parent()
 var grenade_prefab = preload("res://objects/grenade.tscn")
+
+var grenade_sound: AudioStream = preload("res://assets/audio/items/grenade_throw.wav")
+
+var audi: AudioStreamPlayer2D
 
 var is_on: bool = false
 var start_speed = 250
@@ -17,6 +23,7 @@ func set_on(on: bool) -> void:
 
 
 func _ready() -> void:
+	audi = get_node(audi_path)
 	set_on(false)
 	show_grenades_count()
 
@@ -32,7 +39,8 @@ func spawn_grenade(dir: Vector2) -> void:
 	grenade.global_position = global_position
 	grenade.linear_velocity = dir
 	grenade.angular_velocity = rand_range(20, 50)
-	
+	audi.stream = grenade_sound
+	audi.play()
 
 
 func show_grenades_count() -> void:
@@ -45,7 +53,7 @@ func _process(_delta: float) -> void:
 		set_process(false)
 		return
 	
-	if Input.is_action_just_pressed("mouse_0"):
+	if Input.is_action_just_pressed("mouse_0") && player.may_move:
 		var dir = get_dir()
 		spawn_grenade(dir)
 		grenades_count -= 1
