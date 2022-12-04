@@ -1,0 +1,13 @@
+{
+	"0": {
+		"name": "Лис",
+		"text": "Ты преследуешь меня?",
+		"config_code": "fox",
+	},
+	"1": {
+		"name": "Страйкли",
+		"text": "Нет, конечно!",
+		"config_code": "strikely",
+		"character": "strikely",
+	},
+}

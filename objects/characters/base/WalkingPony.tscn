@@ -10,8 +10,15 @@ height = 8.00004
 [node name="Pony" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 speed = 80
+start_animation = "idle"
 
 [node name="shape" parent="." index="0"]
 shape = SubResource( 1 )
 
+[node name="item" parent="." index="4"]
+texture = null
+
 [node name="agent2d" type="NavigationAgent2D" parent="." index="5"]
+
+[node name="present" parent="." index="6"]
+texture = null

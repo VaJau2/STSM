@@ -12,8 +12,14 @@ export var default_land_material = "snow"
 
 var dir = Vector2()
 
+onready var interaction = get_node("interaction")
 onready var states: PlayerStates = get_node("states")
 onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
+
+
+func pickup_present() -> void:
+	$present.set_on()
+	states.clean()
 
 
 func stun():
@@ -87,6 +93,14 @@ func get_current_animation() -> String:
 		state.running: return "run" if is_moving else "idle"
 		state.walking: return "walk" if is_moving else "idle"
 		_: return "idle"
+
+
+func set_flip_x(flip_on: bool) -> void:
+	.set_flip_x(flip_on)
+	if flip_x:
+		interaction.scale.x = interaction.scale.y * -1
+	else:
+		interaction.scale.x = interaction.scale.y * 1
 
 
 func _ready() -> void:

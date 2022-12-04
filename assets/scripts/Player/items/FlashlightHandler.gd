@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var icon = get_node("/root/Scene/Canvas/FlashlightIcon")
 var flashlight_sound: AudioStream = preload("res://assets/audio/items/flashlight.wav")
 
 export var audi_path: NodePath
@@ -10,6 +11,7 @@ func set_on(on: bool) -> void:
 	audi.stream = flashlight_sound
 	audi.play()
 	visible = on
+	icon.set_on(on)
 
 
 func _ready():

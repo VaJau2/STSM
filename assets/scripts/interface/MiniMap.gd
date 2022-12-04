@@ -1,4 +1,4 @@
-extends MarginContainer
+extends Control
 
 #--------------------------------
 # Отвечает за отображение мини-карты
@@ -26,6 +26,13 @@ func get_marker_pos(item) -> Vector2:
 	return pos_by_player * grid_scale + grid.rect_size / 2
 
 
+func spawn_marker(item) -> void:
+	var new_marker = icons[item.minimap_icon].duplicate()
+	grid.add_child(new_marker)
+	new_marker.show()
+	markers[item] = new_marker
+
+
 func update_marker(item) -> void:
 	var marker_pos = get_marker_pos(item)
 	
@@ -48,10 +55,7 @@ func _ready():
 	
 	var map_objects = get_tree().get_nodes_in_group("minimap_object")
 	for item in map_objects:
-		var new_marker = icons[item.minimap_icon].duplicate()
-		grid.add_child(new_marker)
-		new_marker.show()
-		markers[item] = new_marker
+		spawn_marker(item)
 
 
 func _process(_delta):
@@ -60,4 +64,10 @@ func _process(_delta):
 	
 	if !visible: return
 	for item in markers:
-		update_marker(item)
+		if is_instance_valid(item):
+			update_marker(item)
+		else:
+			markers[item].queue_free()
+			var result = markers.erase(item)
+			if !result:
+				push_error("error in deleting map marker")

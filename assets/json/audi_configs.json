@@ -31,4 +31,24 @@
 		"max_pitch": "2",
 		"chars_to_sound": "4",
 	},
+	"strikely_angry": {
+		"sounds": {
+			"0": "beeps2/sound_a.wav",
+			"1": "beeps2/sound_i.wav",
+			"2": "beeps2/sound_e.wav",
+			"3": "beeps2/sound_o.wav",
+		},
+		"min_pitch": "1.5",
+		"max_pitch": "2.5",
+		"chars_to_sound": "2",
+	},
+	"fox": {
+		"sounds": {
+			"0": "beeps2/sound_u.wav",
+			"2": "beeps2/sound_y.wav",
+		},
+		"min_pitch": "0.7",
+		"max_pitch": "1",
+		"chars_to_sound": "4",
+	}
 }

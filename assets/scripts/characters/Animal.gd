@@ -11,7 +11,7 @@ const WALK_CHANCE = 0.5
 
 export (Array, NodePath) var random_points_path
 export var idle_animations: PoolStringArray
-export var dialogue_code: String
+export var dialogue_codes: PoolStringArray
 export var minimap_icon: String = "animal"
 
 var may_interact: bool setget , is_may_interact
@@ -45,12 +45,13 @@ func get_new_state() -> void:
 
 
 func is_may_interact() -> bool:
-	return !dialogue_code.empty()
+	return !dialogue_codes.empty()
 
 
 func interact(_interactor) -> void:
 	may_move = false
-	G.dialogue.start_dialogue(dialogue_code)
+	var rand_code = rand_range(0, dialogue_codes.size())
+	G.dialogue.start_dialogue(dialogue_codes[rand_code])
 	yield(G.dialogue, "finished")
 	may_move = true
 

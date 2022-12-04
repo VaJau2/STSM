@@ -7,7 +7,7 @@ onready var grenades_parent = get_node("/root/Scene/YSort")
 onready var grenades_count_label = get_node("/root/Scene/Canvas/GrenadesCount")
 onready var items_handler = get_node("../item")
 onready var player = get_parent()
-var grenade_prefab = preload("res://objects/grenade.tscn")
+var grenade_prefab = preload("res://objects/items/grenade.tscn")
 
 var grenade_sound: AudioStream = preload("res://assets/audio/items/grenade_throw.wav")
 

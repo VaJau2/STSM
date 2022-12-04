@@ -21,6 +21,7 @@ signal finished
 
 
 func start_dialogue(file) -> void:
+	if visible: return
 	nodes = G.parse_json_data(file, "dialogues")
 	show_node(0)
 

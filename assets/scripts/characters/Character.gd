@@ -62,5 +62,5 @@ func change_animation(new_animation: String) -> void:
 
 
 func _physics_process(_delta) -> void:
-	if (velocity.length() > 0):
+	if may_move && velocity.length() > 0:
 		velocity = move_and_slide(velocity)

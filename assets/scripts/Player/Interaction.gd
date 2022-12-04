@@ -1,6 +1,6 @@
 extends Area2D
 
-
+onready var player = get_parent()
 var interact_objects = []
 
 
@@ -24,4 +24,4 @@ func _input(event):
 	if event is InputEventKey && Input.is_action_just_pressed("ui_interact"):
 		if interact_objects.size() > 0:
 			var key = interact_objects.size() - 1
-			interact_objects[key].interact(self)
+			interact_objects[key].interact(player)

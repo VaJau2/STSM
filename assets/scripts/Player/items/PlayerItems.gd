@@ -8,7 +8,7 @@ export var light_handler_path: NodePath
 export var grenade_handler_path: NodePath
 
 
-var flashlight: Texture = preload("res://assets/sprites/items/flashlight.png")
+var flashlight: Texture = preload("res://assets/sprites/items/flashlight/flashlight_item.png")
 var flashlight_on: bool = false
 var light_handler = null
 
