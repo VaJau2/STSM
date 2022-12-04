@@ -44,6 +44,8 @@ func update_marker(item) -> void:
 				markers[item].scale = Vector2(.75, .75)
 			marker_pos.x = clamp(marker_pos.x, OFFSET, grid.rect_size.x - OFFSET)
 			marker_pos.y = clamp(marker_pos.y, OFFSET, grid.rect_size.y - OFFSET)
+		"enemy":
+			markers[item].flip_h = item.flip_x
 		
 	markers[item].position = marker_pos
 

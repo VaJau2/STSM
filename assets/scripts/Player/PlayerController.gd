@@ -38,11 +38,6 @@ func is_crouching() -> bool:
 	return states.is_crouching()
 
 
-func set_land_material(material: String):
-	sound_steps.set_land_material(material)
-	.set_land_material(material)
-
-
 func update_keys() -> void:
 	dir = Vector2.ZERO
 	may_move = states.may_move()

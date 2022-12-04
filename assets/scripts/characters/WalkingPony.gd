@@ -41,10 +41,14 @@ func update_moving():
 		has_target = false
 	else:
 		var move_dir = position.direction_to(agent.get_next_location())
-		velocity = move_dir * speed
+		update_walk_velocity(move_dir)
 		agent.set_velocity(velocity)
 		look_at_direction(move_dir)
-		change_animation("walk")
+
+
+func update_walk_velocity(dir: Vector2) -> void:
+	velocity = dir * speed
+	change_animation("walk")
 
 
 func look_at_direction(direction: Vector2):

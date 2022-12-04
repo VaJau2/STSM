@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var icon = get_node("/root/Scene/Canvas/FlashlightIcon")
+onready var detect_body_shape = get_node_or_null("flashlight/shape")
 var flashlight_sound: AudioStream = preload("res://assets/audio/items/flashlight.wav")
 
 export var audi_path: NodePath
@@ -12,6 +13,8 @@ func set_on(on: bool) -> void:
 	audi.play()
 	visible = on
 	icon.set_on(on)
+	if detect_body_shape != null:
+		detect_body_shape.disabled = !on
 
 
 func _ready():

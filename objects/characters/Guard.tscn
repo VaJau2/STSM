@@ -1,9 +1,72 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/characters/base/WalkingPony.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/ponies/guard.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/characters/Guard.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/characters/SeekArea.gd" type="Script" id=4]
 
-[node name="Guard" instance=ExtResource( 1 )]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 101.5, 40.5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 190.011
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 214.0
+height = 222.001
+
+[node name="Guard" groups=["minimap_object"] instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+code = "guard"
+speed = 100
+patrol_points_path = [  ]
+default_land_material = "snow"
+run_speed = 150
 
 [node name="sprite" parent="." index="2"]
 texture = ExtResource( 2 )
+
+[node name="agent2d" parent="." index="5"]
+path_desired_distance = 2.0
+target_desired_distance = 2.0
+path_max_distance = 15.0
+
+[node name="soundSteps" parent="." index="9"]
+volume_db = 0.6
+max_distance = 800.0
+
+[node name="seekArea" type="Node2D" parent="." index="12"]
+script = ExtResource( 4 )
+
+[node name="close" type="Area2D" parent="seekArea" index="0"]
+collision_mask = 3
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="seekArea/close" index="0"]
+position = Vector2( 80.5, -10.5 )
+shape = SubResource( 1 )
+
+[node name="walking" type="Area2D" parent="seekArea" index="1"]
+collision_mask = 3
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="seekArea/walking" index="0"]
+shape = SubResource( 2 )
+
+[node name="running" type="Area2D" parent="seekArea" index="2"]
+collision_layer = 3
+collision_mask = 3
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="seekArea/running" index="0"]
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="seekRay" type="RayCast2D" parent="." index="13"]
+
+[connection signal="body_entered" from="seekArea/close" to="seekArea" method="_on_body_entered" binds= [ "close" ]]
+[connection signal="body_exited" from="seekArea/close" to="seekArea" method="_on_body_exited" binds= [ "close" ]]
+[connection signal="body_entered" from="seekArea/walking" to="seekArea" method="_on_body_entered" binds= [ "walking" ]]
+[connection signal="body_exited" from="seekArea/walking" to="seekArea" method="_on_body_exited" binds= [ "walking" ]]
+[connection signal="body_entered" from="seekArea/running" to="seekArea" method="_on_body_entered" binds= [ "running" ]]
+[connection signal="body_exited" from="seekArea/running" to="seekArea" method="_on_body_exited" binds= [ "running" ]]

@@ -371,6 +371,17 @@ position = Vector2( 1467, 629 )
 [node name="9" type="Node2D" parent="random_points/tree_points"]
 position = Vector2( 963, -77 )
 
+[node name="patrol_points" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="patrol_points"]
+position = Vector2( 327, 78 )
+
+[node name="1" type="Node2D" parent="patrol_points"]
+position = Vector2( 492, 195 )
+
+[node name="2" type="Node2D" parent="patrol_points"]
+position = Vector2( 338, 265 )
+
 [node name="borders" type="StaticBody2D" parent="."]
 position = Vector2( -50, 100 )
 
@@ -572,10 +583,14 @@ position = Vector2( 1356, -1553 )
 position = Vector2( 745, -1719 )
 
 [node name="guards" type="Node2D" parent="YSort" groups=["sorting"]]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Guard" parent="YSort/guards" instance=ExtResource( 21 )]
-position = Vector2( 201, 214 )
-code = "guard"
+position = Vector2( 236, 217 )
+patrol_points_path = [ NodePath("../../../patrol_points/0"), NodePath("../../../patrol_points/1"), NodePath("../../../patrol_points/2") ]
 
 [node name="Fox" parent="YSort" instance=ExtResource( 12 )]
 position = Vector2( 880, 357 )

@@ -38,6 +38,8 @@ func is_crouching() -> bool:
 
 func set_land_material(material: String):
 	land_material = material
+	if sound_steps != null:
+		sound_steps.set_land_material(material)
 
 
 func animate_mouth(time = 0):
@@ -50,10 +52,7 @@ func animate_mouth(time = 0):
 func set_flip_x(flip_on: bool) -> void:
 	if flip_x == flip_on: return
 	flip_x = flip_on
-	if flip_x:
-		scale.x = scale.y * -1
-	else:
-		scale.x = scale.y * 1
+	scale.x = scale.y * (-1.0 if flip_x else 1.0)
 
 
 func change_animation(new_animation: String) -> void:

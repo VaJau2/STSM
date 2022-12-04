@@ -138,7 +138,6 @@ position = Vector2( -64, -70 )
 
 [node name="Strikely" parent="YSort" instance=ExtResource( 15 )]
 position = Vector2( -74, -87 )
-start_animation = "idle"
 
 [node name="Door" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( -4, -33 )
