@@ -11,23 +11,41 @@ export var acceleration = 800
 export var default_land_material = "snow"
 
 var dir = Vector2()
+var tied = false
 
 onready var interaction = get_node("interaction")
 onready var states: PlayerStates = get_node("states")
 onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
+onready var pickable_item = get_node("pickableItem")
+var has_item: bool = false
 
 
-func pickup_present() -> void:
-	$present.set_on()
+func pickup_item(item_type: String, item = null) -> void:
 	states.clean()
+	pickable_item.set_on(item_type, item)
+	has_item = true
+
+
+func play_tie_sound() -> void:
+	$items.stream = load("res://assets/audio/items/lasso_tie.wav")
+	$items.play()
+
+
+func tie() -> void:
+	states.set_tied()
+	tied = true
+	play_tie_sound()
+	yield(get_tree().create_timer(2), "timeout")
+	G.goto_scene("Lose")
 
 
 func stun():
-	if grenade_effects:
-		states.set_stunned(true)
-		grenade_effects.show()
-		yield(grenade_effects, "done")
-		states.set_stunned(false)
+	if grenade_effects == null: return
+	if !tied: states.set_stunned(true)
+	grenade_effects.show()
+	yield(grenade_effects, "done")
+	if tied: return
+	states.set_stunned(false)
 
 
 func is_running() -> bool:
@@ -84,6 +102,7 @@ func get_current_animation() -> String:
 	
 	match states.moving_state:
 		state.stunned: return "stunned"
+		state.tied: return "tied"
 		state.crouching: return "crouch" if is_moving else "crouch-idle"
 		state.running: return "run" if is_moving else "idle"
 		state.walking: return "walk" if is_moving else "idle"
@@ -100,6 +119,7 @@ func set_flip_x(flip_on: bool) -> void:
 
 func _ready() -> void:
 	$soundSteps.land_material = default_land_material
+	G.player = self
 
 
 func _process(delta) -> void:

@@ -9,6 +9,7 @@ const MIN_IDLE = 4
 const MAX_IDLE = 10
 const WALK_CHANCE = 0.5
 
+
 export (Array, NodePath) var random_points_path
 export var idle_animations: PoolStringArray
 export var dialogue_codes: PoolStringArray
@@ -26,9 +27,15 @@ func _ready() -> void:
 	get_new_state()
 
 
-func _process(delta) -> void:
-	if has_target:
-		return
+func set_is_stunned(value: bool) -> void:
+	.set_is_stunned(value)
+	change_animation("idle")
+
+
+func _process(delta: float) -> void:
+	._process(delta)
+	if is_stunned: return
+	if has_target: return
 	elif idle_timer > 0:
 		idle_timer -= delta
 	else:

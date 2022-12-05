@@ -4,8 +4,12 @@ extends StaticBody2D
 # Груз, лежащий на земле и подбираемый игроком
 #--------------------------------
 
-var may_interact: bool = true
+var may_interact: bool setget ,get_may_interact
 var minimap_icon = "mission"
+
+
+func get_may_interact() -> bool:
+	return !G.player.has_item
 
 
 func spawn_marker() -> void:
@@ -14,5 +18,4 @@ func spawn_marker() -> void:
 
 
 func interact(player) -> void:
-	player.pickup_present()
-	queue_free()
+	player.pickup_item("present", self)

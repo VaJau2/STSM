@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/scripts/player/items/PlayerItems.gd" type="Script" id=9]
 [ext_resource path="res://assets/scripts/player/items/FlashlightHandler.gd" type="Script" id=10]
 [ext_resource path="res://assets/scripts/player/items/GrenadesHandler.gd" type="Script" id=11]
-[ext_resource path="res://assets/scripts/player/items/PresentHandler.gd" type="Script" id=12]
+[ext_resource path="res://assets/scripts/player/items/PickedItemHandler.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.5, 10 )
@@ -43,12 +43,12 @@ position = Vector2( 12, -25 )
 script = ExtResource( 11 )
 audi_path = NodePath("../items")
 
-[node name="present" parent="." index="6"]
+[node name="pickableItem" parent="." index="6"]
 script = ExtResource( 12 )
 
 [node name="camera" type="Camera2D" parent="." index="7"]
 current = true
-zoom = Vector2( 0.6, 0.6 )
+zoom = Vector2( 0.55, 0.55 )
 smoothing_enabled = true
 
 [node name="states" type="Node" parent="." index="8"]
@@ -96,6 +96,6 @@ disabled = true
 
 [node name="items" type="AudioStreamPlayer2D" parent="." index="14"]
 
-[connection signal="changed" from="states" to="present" method="_on_states_changed"]
+[connection signal="changed" from="states" to="pickableItem" method="_on_states_changed"]
 [connection signal="body_entered" from="interaction" to="interaction" method="_on_interaction_body_entered"]
 [connection signal="body_exited" from="interaction" to="interaction" method="_on_interaction_body_exited"]

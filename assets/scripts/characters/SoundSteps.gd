@@ -34,16 +34,16 @@ export var stepsRunArray = {
 }
 
 
-func get_volume():
+func get_volume() -> float:
 	return CROUCH_VOLUME if parent.is_crouching() else NORMAL_VOLUME
 
 
-func set_land_material(new_material: String):
+func set_land_material(new_material: String) -> void:
 	if new_material.empty(): return
 	land_material = new_material
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if parent.velocity.length() > 0:
 		if timer > 0:
 			timer -= delta

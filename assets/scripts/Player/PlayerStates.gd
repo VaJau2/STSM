@@ -8,12 +8,12 @@ class_name PlayerStates
 
 
 var moving_state = moving_states.walking
-enum moving_states {walking, running, crouching, stunned}
+enum moving_states {walking, running, crouching, stunned, tied}
 
 signal changed
 
 
-func set_state(new_state: int):
+func set_state(new_state: int) -> void:
 	if moving_state == new_state: return
 	moving_state = new_state
 	emit_signal("changed")
@@ -23,8 +23,17 @@ func clean() -> void:
 	set_state(moving_states.walking)
 
 
+func may_move() -> bool:
+	return moving_state != moving_states.stunned \
+		&& moving_state != moving_states.tied
+
+
 func set_stunned(stun: bool) -> void:
 	set_state(moving_states.stunned if stun else moving_states.walking)
+
+
+func set_tied() -> void:
+	set_state(moving_states.tied)
 
 
 func toggle_crouching() -> void:
@@ -49,7 +58,3 @@ func is_running() -> bool:
 
 func is_crouching() -> bool:
 	return moving_state == moving_states.crouching
-
-
-func may_move() -> bool:
-	return moving_state != moving_states.stunned

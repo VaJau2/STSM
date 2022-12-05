@@ -35,6 +35,7 @@ func spawn_marker(item) -> void:
 
 func update_marker(item) -> void:
 	var marker_pos = get_marker_pos(item)
+	markers[item].visible = item.visible
 	
 	match item.minimap_icon:
 		"mission":

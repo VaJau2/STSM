@@ -21,6 +21,7 @@ export(Array, NodePath) var patrol_points_path
 export var default_land_material = "snow"
 export var run_speed = 150
 
+onready var lasso_handler = get_node("lassoHandler")
 onready var seek_area = get_node("seekArea")
 
 var minimap_icon: String = "enemy"
@@ -33,17 +34,49 @@ var pointI: int
 var wait_timer: float
 var update_timer: float
 
+var may_interact: bool setget ,get_may_interact
+var is_tied: bool = false
+
+
+func get_may_interact() -> bool:
+	if !is_stunned: return false
+	if is_tied:
+		return !G.player.has_item
+	return true
+
+
+func interact(player) -> void:
+	if is_tied:
+		player.pickup_item("guard", self)
+	else:
+		change_animation("tied")
+		player.play_tie_sound()
+		is_tied = true
+
+
+func player_is_tied() -> bool:
+	if G.player == null: return false
+	return G.player.tied
+
+
+func set_is_stunned(value: bool) -> void:
+	if is_tied: return
+	.set_is_stunned(value)
+	var new_anim = "stunned" if value else "idle"
+	change_animation(new_anim)
+
 
 func set_state(new_state: int) -> void:
 	match new_state:
 		states.idle:
+			lasso_handler.set_item_on(false)
 			set_patrol_target()
 		states.search:
 			var last_see_pos = seek_area.player_position
 			set_target(last_see_pos)
 			wait_timer = rand_range(SEARCH_WAIT_TIME.MIN, SEARCH_WAIT_TIME.MAX)
 		states.attack:
-			pass
+			lasso_handler.set_item_on(true)
 	state = new_state
 
 
@@ -105,6 +138,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if is_tied: return
 	._process(delta)
 	match state:
 		states.idle:

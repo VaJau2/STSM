@@ -19,6 +19,3 @@ shape = SubResource( 1 )
 texture = null
 
 [node name="agent2d" type="NavigationAgent2D" parent="." index="5"]
-
-[node name="present" parent="." index="6"]
-texture = null

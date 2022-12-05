@@ -6,32 +6,53 @@ extends Character
 
 class_name WalkingPony
 
+const STUN_TIME = 7
+
 onready var agent = get_node("agent2d")
 export var speed = 80
 export var start_animation = "idle"
 
 var has_target = false
 
+var is_stunned: bool = false
+var stun_timer: float = 0
+
 signal arrived
 
 
-func _ready():
+func _ready() -> void:
 	change_animation(start_animation)
 
 
-func _process(_delta):
+func _process(delta: float) -> void:
+	if is_stunned:
+		if stun_timer > 0:
+			stun_timer -= delta
+		else:
+			set_is_stunned(false)
+		
 	if has_target:
 		update_moving()
 
 
-func set_target(target: Vector2):
+func set_target(target: Vector2) -> void:
 	agent.set_target_location(target)
 	has_target = true
 
 
-func update_moving():
-	if !may_move:
-		change_animation(start_animation)
+func set_is_stunned(value: bool) -> void:
+	is_stunned = value
+	may_move = !value
+	stun_timer = STUN_TIME if value else 0
+
+
+func stun() -> void:
+	set_is_stunned(true)
+
+
+func update_moving() -> void:
+	if !may_move: 
+		velocity = Vector2.ZERO
 		return
 	
 	if agent.is_navigation_finished():
