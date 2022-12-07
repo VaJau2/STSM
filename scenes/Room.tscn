@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/materials/fonts/pixel-big-theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/background/house/room_walls.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/sprites/background/house/shadows/shadows-open.png" type="Texture" id=18]
 [ext_resource path="res://assets/audio/music/The Chordettes - Mr. Sandman.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/audio/music/The Chordettes - Mr. Sandman - lowered.mp3" type="AudioStream" id=20]
+[ext_resource path="res://assets/materials/fonts/pixel-theme.tres" type="Theme" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 124.5 )
@@ -248,7 +249,7 @@ __meta__ = {
 
 [node name="DialogueMenu" parent="Canvas" instance=ExtResource( 10 )]
 
-[node name="Start_label" type="Label" parent="Canvas"]
+[node name="StartLabel" type="Label" parent="Canvas"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -259,6 +260,21 @@ margin_right = 198.0
 margin_bottom = -23.0
 theme = ExtResource( 1 )
 text = "Нажмите пробел, чтобы начать игру"
+align = 1
+valign = 1
+
+[node name="SkipLabel" type="Label" parent="Canvas"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -243.0
+margin_right = -2.0
+margin_bottom = -226.0
+theme = ExtResource( 21 )
+text = "F - пропустить"
 align = 1
 valign = 1
 
@@ -276,6 +292,9 @@ door_path = NodePath("../YSort/Door")
 phone_path = NodePath("../YSort/table/Phone")
 strikely_path = NodePath("../YSort/Strikely")
 shadows_path = NodePath("../Shadows")
+
+[node name="Timer" type="Timer" parent="Scenario"]
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

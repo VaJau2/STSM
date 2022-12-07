@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 var handler = null
 var velocity: Vector2
-var start_timer = 0.5
+var start_timer = 0.4
 
 
 func _process(delta: float) -> void:

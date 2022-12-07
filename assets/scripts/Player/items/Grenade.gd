@@ -21,6 +21,8 @@ func _integrate_forces(state) -> void:
 
 
 func explode() -> void:
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
 	$audi.play()
 	$explode.visible = true
 	for victim in victims:

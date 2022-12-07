@@ -198,7 +198,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="Shadows" type="Sprite" parent="Truck"]
-modulate = Color( 0.411765, 0.4, 0.435294, 0.941176 )
+modulate = Color( 0.156863, 0.141176, 0.188235, 1 )
 position = Vector2( 75, -6 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 9 )

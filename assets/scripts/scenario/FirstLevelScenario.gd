@@ -1,6 +1,8 @@
 extends Node
 
-onready var start_label = get_node("../Canvas/Start_label")
+onready var start_label = get_node("../Canvas/StartLabel")
+onready var skip_label = get_node("../Canvas/SkipLabel")
+onready var timer = get_node("Timer")
 
 export var mother_path: NodePath
 export var target_path: NodePath
@@ -12,13 +14,16 @@ export var shadows_path: NodePath
 var mother: Character
 var strikely: Character
 var target: Node2D
-var door
-var phone
+var door = null
+var phone = null
 var start_pos: Vector2
-var shadows
+var shadows = null
+
+var may_skip: bool = false
+var game_started: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	mother = get_node(mother_path)
 	strikely = get_node(strikely_path)
 	start_pos = mother.position
@@ -28,17 +33,28 @@ func _ready():
 	shadows = get_node(shadows_path)
 
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_space"):
-		start_game()
-		set_process(false)
+func _process(_delta: float) -> void:
+	if !game_started:
+		if Input.is_action_just_pressed("ui_space"):
+			start_game()
+	
+	if may_skip:
+		if Input.is_action_just_pressed("ui_flashlight"):
+			G.goto_scene("Base")
 
 
-func start_game():
+func set_may_skip(on: bool) -> void:
+	skip_label.visible = on
+	may_skip = on
+
+
+func start_game() -> void:
 	#звонит телефон
+	game_started = true
 	start_label.visible = false
 	phone.set_ring(true)
-	yield(get_tree().create_timer(3), "timeout")
+	timer.start(3)
+	yield(timer, "timeout")
 
 	#приходит желтая пня
 	door.open()
@@ -47,6 +63,7 @@ func start_game():
 	yield(mother, "arrived")
 	phone.set_ring(false)
 	phone.set_open(true)
+	set_may_skip(true)
 
 	#запускается первый диалог
 	G.dialogue.start_dialogue("start")
@@ -57,7 +74,8 @@ func start_game():
 	mother.set_target(start_pos)
 	yield(mother, "arrived")
 	mother.queue_free()
-	yield(get_tree().create_timer(3), "timeout")
+	timer.start(3)
+	yield(timer, "timeout")
 
 	#приходит страйкли
 	strikely.set_target(target.position)
@@ -66,13 +84,16 @@ func start_game():
 	shadows.set_open(false)
 
 	phone.set_open(true)
-	yield(get_tree().create_timer(1), "timeout")
+	timer.start(1)
+	yield(timer, "timeout")
 
 	#запускается второй диалог
 	G.dialogue.start_dialogue("start2")
 	yield(G.dialogue, "finished")
 	phone.set_open(false)
-	yield(get_tree().create_timer(1), "timeout")
+	set_may_skip(false)
+	timer.start(1)
+	yield(timer, "timeout")
 
 	#страйкли уходит
 	door.open()
@@ -84,5 +105,6 @@ func start_game():
 	shadows.set_open(false)
 	
 	#переход на следующую сцену
-	yield(get_tree().create_timer(2), "timeout")
+	timer.start(2)
+	yield(timer, "timeout")
 	G.goto_scene("Road")

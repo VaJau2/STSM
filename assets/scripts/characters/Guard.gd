@@ -5,6 +5,7 @@ extends WalkingPony
 # Патрулируют, ищут и преследуют игрока в зависимости от состояния
 #--------------------------------
 
+class_name Guard
 
 const PATROL_WAIT_TIME = {
 	"MIN": 2,
@@ -45,6 +46,11 @@ func get_may_interact() -> bool:
 	return true
 
 
+func untie() -> void:
+	is_tied = false
+	may_move = true
+
+
 func interact(player) -> void:
 	if is_tied:
 		player.pickup_item("guard", self)
@@ -72,13 +78,12 @@ func set_state(new_state: int) -> void:
 			lasso_handler.set_item_on(false)
 			set_patrol_target()
 		states.search:
-			var last_see_pos = seek_area.player_position
+			var last_see_pos = seek_area.victim_position
 			set_target(last_see_pos)
 			wait_timer = rand_range(SEARCH_WAIT_TIME.MIN, SEARCH_WAIT_TIME.MAX)
 		states.attack:
 			lasso_handler.set_item_on(true)
 	state = new_state
-
 
 func set_patrol_target() -> void:
 	if patrol_points.size() == 0: return
@@ -91,12 +96,24 @@ func set_patrol_target() -> void:
 
 
 func update_patrol(delta: float) -> void:
+	if has_tied_ally(): return
 	if patrol_points.size() == 0: return
 	if has_target: return
 	if wait_timer > 0:
 		wait_timer -= delta
 	else:
 		set_patrol_target()
+
+
+func has_tied_ally() -> bool:
+	if seek_area.tied_allies.size() > 0:
+		var temp_ally = seek_area.tied_allies[0]
+		if !temp_ally.is_tied: 
+			seek_area.tied_allies.remove(0)
+		else:
+			set_target(temp_ally.global_position)
+		return true
+	return false
 
 
 func update_search(delta: float) -> void:
@@ -108,20 +125,20 @@ func update_search(delta: float) -> void:
 
 
 func update_attack(delta: float) -> void:
-	update_player_pos(delta)
+	update_victim_pos(delta)
 
 
-func update_player_pos(delta: float) -> void:
+func update_victim_pos(delta: float) -> void:
 	if update_timer > 0:
 		update_timer -= delta
 	else:
-		set_target(seek_area.player_position)
+		set_target(seek_area.victim_position)
 		update_timer = UPDATE_POS_TIME
 
 
 func update_walk_velocity(dir: Vector2) -> void:
 	if state == states.attack:
-		var player_pos = seek_area.player_position
+		var player_pos = seek_area.victim_position
 		var distance = global_position.distance_to(player_pos)
 		if distance >= RUN_DISTANCE:
 			velocity = dir * run_speed
@@ -147,3 +164,9 @@ func _process(delta: float) -> void:
 			update_search(delta)
 		states.attack:
 			update_attack(delta)
+
+
+func _on_untie_area_body_entered(body):
+	if is_tied: return
+	if !body.has_method("untie") || !body.is_tied: return
+	body.untie()

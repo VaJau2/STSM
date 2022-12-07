@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://objects/characters/base/WalkingPony.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/ponies/guard.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/scripts/characters/SeekArea.gd" type="Script" id=4]
 [ext_resource path="res://assets/sprites/items/lasso/lasso_item.png" type="Texture" id=5]
 [ext_resource path="res://assets/scripts/player/items/LassoHandler.gd" type="Script" id=6]
-[ext_resource path="res://assets/audio/items/grenade_throw.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/items/lasso_throw.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 101.5, 40.5 )
@@ -17,6 +17,9 @@ radius = 190.011
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 214.0
 height = 222.001
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 20.5, 13 )
 
 [node name="Guard" groups=["minimap_object"] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -89,9 +92,17 @@ shape = SubResource( 3 )
 [node name="seekRay" type="RayCast2D" parent="." index="14"]
 cast_to = Vector2( 0, 0 )
 
+[node name="untie_area" type="Area2D" parent="." index="15"]
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="untie_area" index="0"]
+position = Vector2( -0.5, -1 )
+shape = SubResource( 4 )
+
 [connection signal="body_entered" from="seekArea/close" to="seekArea" method="_on_body_entered" binds= [ "close" ]]
 [connection signal="body_exited" from="seekArea/close" to="seekArea" method="_on_body_exited" binds= [ "close" ]]
 [connection signal="body_entered" from="seekArea/walking" to="seekArea" method="_on_body_entered" binds= [ "walking" ]]
 [connection signal="body_exited" from="seekArea/walking" to="seekArea" method="_on_body_exited" binds= [ "walking" ]]
 [connection signal="body_entered" from="seekArea/running" to="seekArea" method="_on_body_entered" binds= [ "running" ]]
 [connection signal="body_exited" from="seekArea/running" to="seekArea" method="_on_body_exited" binds= [ "running" ]]
+[connection signal="body_entered" from="untie_area" to="." method="_on_untie_area_body_entered"]

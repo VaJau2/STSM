@@ -2,7 +2,7 @@ extends Node2D
 
 const COOLDOWN_TIME = 2
 const THROW_DISTANCE = 200
-const START_SPEED = 4
+const START_SPEED = 4.5
 
 onready var parent = get_parent()
 onready var item = get_node("../item")
@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 	if parent.is_stunned: return
 	if parent.player_is_tied(): return
 	
-	var victim_pos = parent.seek_area.player_position
+	var victim_pos = parent.seek_area.victim_position
 	var distance = global_position.distance_to(victim_pos)
 	if distance > THROW_DISTANCE: return
 	

@@ -54,10 +54,10 @@ rect_scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 7 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 199.0
-margin_bottom = 151.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 198.0
+margin_bottom = 149.0
 rect_clip_content = true
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -67,8 +67,8 @@ custom_constants/margin_bottom = 10
 [node name="back" type="TextureRect" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 184.0
-margin_bottom = 136.0
+margin_right = 182.0
+margin_bottom = 133.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
@@ -92,8 +92,10 @@ visible = false
 position = Vector2( 153.333, 25 )
 texture = ExtResource( 6 )
 
-[node name="player_pos" type="Node2D" parent="MarginContainer"]
+[node name="player_pos" type="Sprite" parent="MarginContainer"]
 position = Vector2( 97, 73 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
 
 [node name="Frame" type="NinePatchRect" parent="."]
 modulate = Color( 0.223529, 0.223529, 0.223529, 1 )

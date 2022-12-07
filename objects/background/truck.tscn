@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprites/background/truck/truck-closed.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 82.5, 27 )
+extents = Vector2( 82.5, 24.5 )
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 79, 21, 58, 21, 54, 15, 40, 15, 36, 21, -45, 21, -50, 15, -64, 15, -70, 23, -78, 23, -78, 14, -84, 4, -84, -22, -63, -38, 33, -39, 41, -25, 75, -18, 84, 1, 84, 13 )
@@ -28,7 +28,7 @@ texture = ExtResource( 1 )
 offset = Vector2( -1.30434, -3.04347 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2( -3, 9 )
+position = Vector2( -3, 11.5 )
 shape = SubResource( 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

@@ -7,6 +7,9 @@ func show():
 	visible = true
 	$anim.current_animation = "show"
 	$audi.play()
-	yield(get_tree().create_timer(3.8), "timeout")
-	visible = false
-	emit_signal("done")
+
+
+func _on_anim_animation_finished(anim_name):
+	if visible && anim_name == "show":
+		visible = false
+		emit_signal("done")
