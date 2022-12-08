@@ -24,6 +24,7 @@ run_speed = 200
 crouch_speed = 60
 acceleration = 800
 default_land_material = "snow"
+present_path = NodePath("")
 
 [node name="sprite" parent="." index="2"]
 texture = ExtResource( 2 )

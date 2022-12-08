@@ -22,6 +22,8 @@ func set_on(item_type: String, item) -> void:
 	temp_item.global_position = Vector2(-999, -999)
 	texture = sprites[item_type]
 	visible = true
+	if item_type == "present":
+		player.has_present = true
 
 
 func _on_states_changed():
@@ -33,3 +35,4 @@ func _on_states_changed():
 	temp_item = null
 	visible = false
 	player.has_item = false
+	player.has_present = false

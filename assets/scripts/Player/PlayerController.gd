@@ -9,15 +9,20 @@ export var run_speed = 200
 export var crouch_speed = 60
 export var acceleration = 800
 export var default_land_material = "snow"
+export var present_path: NodePath
+export var set_grenades_count: int = -1
 
 var dir = Vector2()
 var tied = false
+var is_in_dialogue = false
 
 onready var interaction = get_node("interaction")
 onready var states: PlayerStates = get_node("states")
 onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
 onready var pickable_item = get_node("pickableItem")
+
 var has_item: bool = false
+var has_present: bool = false
 
 
 func pickup_item(item_type: String, item = null) -> void:
@@ -59,6 +64,7 @@ func is_crouching() -> bool:
 func update_keys() -> void:
 	dir = Vector2.ZERO
 	may_move = states.may_move()
+	if is_in_dialogue: return
 	
 	if states.may_move():
 		if Input.is_action_pressed("ui_up"):
@@ -118,8 +124,13 @@ func set_flip_x(flip_on: bool) -> void:
 
 
 func _ready() -> void:
+	if set_grenades_count >= 0:
+		G.grenades_count = set_grenades_count
 	$soundSteps.land_material = default_land_material
 	G.player = self
+	if !present_path.is_empty():
+		var present = get_node(present_path)
+		pickup_item("present", present)
 
 
 func _process(delta) -> void:

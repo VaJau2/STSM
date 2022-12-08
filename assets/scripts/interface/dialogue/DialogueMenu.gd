@@ -22,6 +22,7 @@ signal finished
 
 func start_dialogue(file) -> void:
 	if visible: return
+	set_player_dialogue(true)
 	nodes = G.parse_json_data(file, "dialogues")
 	show_node(0)
 
@@ -62,6 +63,7 @@ func show_node(node) -> void:
 		yield(self, "next_node")
 		show_node(node + 1)
 	else:
+		set_player_dialogue(false)
 		visible = false
 		emit_signal("finished")
 
@@ -76,6 +78,10 @@ func get_timer(node_timer, new_symbol):
 func set_may_continue(may) -> void:
 	continue_label.visible = may
 	may_continue = may
+
+
+func set_player_dialogue(on: bool) -> void:
+	if G.player != null: G.player.is_in_dialogue = on
 
 
 func _ready():

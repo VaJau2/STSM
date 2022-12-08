@@ -1,6 +1,5 @@
 extends Node2D
 
-export var grenades_count = 8
 export var audi_path: NodePath
 
 onready var grenades_parent = get_node("/root/Scene/YSort")
@@ -25,6 +24,7 @@ func set_on(on: bool) -> void:
 func _ready() -> void:
 	audi = get_node(audi_path)
 	set_on(false)
+	yield(get_tree(), "idle_frame")
 	show_grenades_count()
 
 
@@ -44,11 +44,11 @@ func spawn_grenade(dir: Vector2) -> void:
 
 
 func show_grenades_count() -> void:
-	grenades_count_label.grenades_count_change(grenades_count)
+	grenades_count_label.grenades_count_change(G.grenades_count)
 
 
 func _process(_delta: float) -> void:
-	if grenades_count <= 0:
+	if G.grenades_count <= 0:
 		items_handler.set_grenade_on(false)
 		set_process(false)
 		return
@@ -56,5 +56,5 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_0") && player.may_move:
 		var dir = get_dir()
 		spawn_grenade(dir)
-		grenades_count -= 1
+		G.grenades_count -= 1
 		show_grenades_count()

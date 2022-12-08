@@ -25,7 +25,7 @@ func set_flashlight_on(on: bool) -> void:
 
 
 func set_grenade_on(on: bool) -> void:
-	if grenade_handler.grenades_count <= 0 and on: return
+	if G.grenades_count <= 0 and on: return
 	if flashlight_on: set_flashlight_on(false)
 	grenade_on = on
 	texture = grenade if on else null
