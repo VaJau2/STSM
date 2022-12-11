@@ -75,3 +75,6 @@ __meta__ = {
 [node name="audi" type="AudioStreamPlayer" parent="."]
 volume_db = -5.0
 script = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

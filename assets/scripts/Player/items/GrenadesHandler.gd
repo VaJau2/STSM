@@ -14,6 +14,11 @@ var audi: AudioStreamPlayer2D
 
 var is_on: bool = false
 var start_speed = 250
+var grenades_count: int
+
+
+func save_to_global() -> void:
+	G.grenades_count = grenades_count
 
 
 func set_on(on: bool) -> void:
@@ -22,6 +27,7 @@ func set_on(on: bool) -> void:
 
 
 func _ready() -> void:
+	grenades_count = G.grenades_count
 	if grenades_count_label == null:
 		set_process(false)
 		return
@@ -47,11 +53,11 @@ func spawn_grenade(dir: Vector2) -> void:
 
 
 func show_grenades_count() -> void:
-	grenades_count_label.grenades_count_change(G.grenades_count)
+	grenades_count_label.grenades_count_change(grenades_count)
 
 
 func _process(_delta: float) -> void:
-	if G.grenades_count <= 0:
+	if grenades_count <= 0:
 		items_handler.set_grenade_on(false)
 		set_process(false)
 		return
@@ -59,5 +65,5 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_0") && player.may_move:
 		var dir = get_dir()
 		spawn_grenade(dir)
-		G.grenades_count -= 1
+		grenades_count -= 1
 		show_grenades_count()

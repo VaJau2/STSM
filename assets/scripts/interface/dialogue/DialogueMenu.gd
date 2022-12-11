@@ -8,8 +8,9 @@ onready var label = get_node("back/text")
 onready var name_label = get_node("back/name")
 onready var continue_label = get_node("back/continue")
 onready var audi = get_node("audi")
+onready var timer = get_node("Timer")
 
-var timer = 0.03
+var default_time = 0.03
 
 var nodes = {}
 var may_continue = false
@@ -32,7 +33,7 @@ func show_node(node) -> void:
 		visible = true
 		skip = false
 		var temp_node = nodes[str(node)]
-		var node_timer = temp_node["timer"] if temp_node.has("timer") else timer
+		var node_timer = temp_node["timer"] if temp_node.has("timer") else default_time
 		var character = null
 		if temp_node.has("character"):
 			character = G.find_character(temp_node["character"])
@@ -57,7 +58,8 @@ func show_node(node) -> void:
 				count += 1
 				audi.play_dialogue_sound(count, new_symbol, character)
 				var temp_timer = get_timer(node_timer, new_symbol)
-				yield(get_tree().create_timer(temp_timer), "timeout")
+				timer.start(temp_timer)
+				yield(timer, "timeout")
 		
 		set_may_continue(true)
 		yield(self, "next_node")

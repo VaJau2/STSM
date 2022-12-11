@@ -19,3 +19,4 @@ shape = SubResource( 1 )
 texture = null
 
 [node name="agent2d" type="NavigationAgent2D" parent="." index="5"]
+avoidance_enabled = true

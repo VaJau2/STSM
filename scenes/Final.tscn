@@ -22,8 +22,11 @@
 script/source = "extends CanvasLayer
 
 
+export var may_exit: bool = false
+
+
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed(\"ui_space\"):
+	if Input.is_action_just_pressed(\"ui_space\") && may_exit:
 		get_tree().quit()
 "
 
@@ -190,6 +193,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [ -2.0 ]
 }
+tracks/13/type = "value"
+tracks/13/path = NodePath("Canvas:may_exit")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "cutscene"
@@ -350,6 +365,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [ -13.0, -2.0 ]
 }
+tracks/13/type = "value"
+tracks/13/path = NodePath("Canvas:may_exit")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.1, 15, 15.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends AnimationPlayer
@@ -401,8 +428,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 585.0
 margin_top = 129.0
-margin_right = 973.0
-margin_bottom = 501.0
+margin_right = -51.0
+margin_bottom = -99.0
 texture = ExtResource( 8 )
 stretch_mode = 5
 
@@ -470,6 +497,7 @@ theme = ExtResource( 17 )
 text = "Нажмите пробел, чтобы выйти"
 
 [node name="audi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
 volume_db = -2.0
 
 [node name="anim" type="AnimationPlayer" parent="."]

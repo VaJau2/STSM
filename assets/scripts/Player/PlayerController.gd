@@ -19,6 +19,7 @@ var is_in_dialogue = false
 onready var interaction = get_node("interaction")
 onready var states: PlayerStates = get_node("states")
 onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
+onready var grenades_handler = get_node("grenades_spot")
 onready var pickable_item = get_node("pickableItem")
 
 var has_item: bool = false
@@ -26,6 +27,10 @@ var has_present: bool = false
 
 #warning-ignore:unused_signal
 signal drop_item
+
+
+func save_to_global() -> void:
+	grenades_handler.save_to_global()
 
 
 func pickup_item(item_type: String, item = null) -> void:
@@ -128,7 +133,7 @@ func set_flip_x(flip_on: bool) -> void:
 
 func _ready() -> void:
 	if set_grenades_count >= 0:
-		G.grenades_count = set_grenades_count
+		grenades_handler.grenades_count = set_grenades_count
 	$soundSteps.land_material = default_land_material
 	G.player = self
 	if !present_path.is_empty():

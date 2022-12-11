@@ -42,7 +42,7 @@ var is_tied: bool = false
 func get_may_interact() -> bool:
 	if !is_stunned: return false
 	if is_tied:
-		return !G.player.has_item
+		return !G.player.has_item && !G.player.tied
 	return true
 
 

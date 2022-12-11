@@ -166,6 +166,10 @@ tile_data = PoolIntArray( -6815711, 0, 0, -6815710, 0, 0, -6815709, 0, 0, -68157
 
 [node name="road" type="Area2D" parent="materials"]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 material_code = "dirt"
 
 [node name="shape" type="CollisionShape2D" parent="materials/road"]
@@ -210,6 +214,20 @@ position = Vector2( 1325, -2109 )
 
 [node name="3" type="Node2D" parent="patrol_points"]
 position = Vector2( 2163, -2109 )
+
+[node name="4" type="Node2D" parent="patrol_points"]
+position = Vector2( 1659, -1501 )
+
+[node name="5" type="Node2D" parent="patrol_points"]
+position = Vector2( 1659, -1181 )
+
+[node name="6" type="Node2D" parent="patrol_points"]
+position = Vector2( 992, -1175 )
+
+[node name="7" type="Node2D" parent="patrol_points"]
+position = Vector2( 990, -1459 )
+
+[node name="steps_parent" type="Node2D" parent="."]
 
 [node name="target" type="Node2D" parent="." groups=["minimap_object"]]
 position = Vector2( 1884, -2160 )
@@ -325,6 +343,10 @@ position = Vector2( 2429, -1308 )
 position = Vector2( 2340, -1694 )
 
 [node name="lights" type="Node2D" parent="YSort" groups=["sorting"]]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="lightspot2" parent="YSort/lights" instance=ExtResource( 20 )]
 position = Vector2( 1109, -993 )
@@ -386,6 +408,10 @@ patrol_points_path = [ NodePath("../../../patrol_points/3"), NodePath("../../../
 [node name="Guard2" parent="YSort/guards" instance=ExtResource( 12 )]
 position = Vector2( 1338, -1977 )
 patrol_points_path = [ NodePath("../../../patrol_points/3"), NodePath("../../../patrol_points/2"), NodePath("../../../patrol_points/1"), NodePath("../../../patrol_points/2") ]
+
+[node name="Guard3" parent="YSort/guards" instance=ExtResource( 12 )]
+position = Vector2( 1319, -1339 )
+patrol_points_path = [ NodePath("../../../patrol_points/4"), NodePath("../../../patrol_points/5"), NodePath("../../../patrol_points/6"), NodePath("../../../patrol_points/7") ]
 
 [node name="exit" type="StaticBody2D" parent="YSort"]
 position = Vector2( 1886, -2152 )

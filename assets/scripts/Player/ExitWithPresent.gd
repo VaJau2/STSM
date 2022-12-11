@@ -13,4 +13,5 @@ func get_may_interact() -> bool:
 
 func interact(_player) -> void:
 	if audi != null: audi.play()
+	G.player.save_to_global()
 	G.goto_scene(new_scene_name)
