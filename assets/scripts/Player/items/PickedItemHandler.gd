@@ -36,3 +36,4 @@ func _on_states_changed():
 	visible = false
 	player.has_item = false
 	player.has_present = false
+	player.emit_signal("drop_item")

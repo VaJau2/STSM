@@ -3,7 +3,7 @@ extends Node2D
 export var audi_path: NodePath
 
 onready var grenades_parent = get_node("/root/Scene/YSort")
-onready var grenades_count_label = get_node("/root/Scene/Canvas/GrenadesCount")
+onready var grenades_count_label = get_node_or_null("/root/Scene/Canvas/GrenadesCount")
 onready var items_handler = get_node("../item")
 onready var player = get_parent()
 var grenade_prefab = preload("res://objects/items/grenade.tscn")
@@ -22,6 +22,9 @@ func set_on(on: bool) -> void:
 
 
 func _ready() -> void:
+	if grenades_count_label == null:
+		set_process(false)
+		return
 	audi = get_node(audi_path)
 	set_on(false)
 	yield(get_tree(), "idle_frame")

@@ -9,7 +9,7 @@ script/source = "extends Node2D
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(\"ui_space\"):
-		G.goto_scene(\"Base\")
+		G.goto_scene(G.reload_level)
 "
 
 [node name="Node2D" type="Node2D"]

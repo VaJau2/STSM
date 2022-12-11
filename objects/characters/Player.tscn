@@ -25,6 +25,7 @@ crouch_speed = 60
 acceleration = 800
 default_land_material = "snow"
 present_path = NodePath("")
+set_grenades_count = -1
 
 [node name="sprite" parent="." index="2"]
 texture = ExtResource( 2 )
@@ -96,6 +97,7 @@ polygon = PoolVector2Array( 2, -1, 181, -63, 193, -37, 194, 37, 178, 63 )
 disabled = true
 
 [node name="items" type="AudioStreamPlayer2D" parent="." index="14"]
+volume_db = -2.0
 
 [connection signal="changed" from="states" to="pickableItem" method="_on_states_changed"]
 [connection signal="body_entered" from="interaction" to="interaction" method="_on_interaction_body_entered"]

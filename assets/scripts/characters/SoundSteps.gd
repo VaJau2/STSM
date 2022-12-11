@@ -9,8 +9,8 @@ const STEP_RUN_COOLDOWN = 0.55
 
 const STEP_SOUNDS_COUNT = 3
 
-const NORMAL_VOLUME = 1.5
-const CROUCH_VOLUME = -3.0
+const NORMAL_VOLUME = -4.0
+const CROUCH_VOLUME = -14.0
 
 var timer = 0
 var stepI = 0

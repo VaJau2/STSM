@@ -24,6 +24,9 @@ onready var pickable_item = get_node("pickableItem")
 var has_item: bool = false
 var has_present: bool = false
 
+#warning-ignore:unused_signal
+signal drop_item
+
 
 func pickup_item(item_type: String, item = null) -> void:
 	states.clean()

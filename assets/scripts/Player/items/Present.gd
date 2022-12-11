@@ -6,10 +6,11 @@ extends StaticBody2D
 
 var may_interact: bool setget ,get_may_interact
 var minimap_icon = "mission"
+var interactable: bool = true
 
 
 func get_may_interact() -> bool:
-	return !G.player.has_item
+	return interactable && !G.player.has_item
 
 
 func spawn_marker() -> void:

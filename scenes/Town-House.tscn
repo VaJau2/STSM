@@ -1,0 +1,320 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://assets/audio/furniture/doorClose.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sprites/background/town-house/town-house-back.png" type="Texture" id=2]
+[ext_resource path="res://objects/characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/items/Present.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/scripts/player/items/AfterGrenadeEffect.gd" type="Script" id=8]
+[ext_resource path="res://assets/materials/fonts/pixel-theme.tres" type="Theme" id=9]
+[ext_resource path="res://assets/sprites/interface/after_grenade.png" type="Texture" id=10]
+[ext_resource path="res://assets/audio/items/grenade_close.wav" type="AudioStream" id=11]
+[ext_resource path="res://objects/interface/MiniMap.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/interface/GrenadesCount.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/interface/FlashlightIcon.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/sprites/background/town-house/town-house-table.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/background/town-house/town-house-tree.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/background/town-house/town-house-tree-light.png" type="Texture" id=18]
+
+[sub_resource type="OccluderPolygon2D" id=34]
+polygon = PoolVector2Array( 51, -22, 51, 26, -13, 26, -13, -23 )
+
+[sub_resource type="GDScript" id=29]
+script/source = "extends Node2D
+
+
+var minimap_icon = \"mission\"
+"
+
+[sub_resource type="GDScript" id=41]
+script/source = "extends Area2D
+
+var player_here: bool = false
+
+
+func _on_presentDrop_body_entered(body):
+	if body.name == \"Player\": player_here = true
+
+
+func _on_presentDrop_body_exited(body):
+	if body.name == \"Player\": player_here = false
+
+
+func _on_Player_drop_item():
+	if player_here:
+		get_node(\"../YSort/Present\").interactable = false
+		G.goto_scene(\"Final\")
+
+
+"
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 25.5, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 22, 29 )
+
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 7.5, 12 )
+
+[sub_resource type="OccluderPolygon2D" id=37]
+polygon = PoolVector2Array( 30, -37, 29, 3, 24, 3, 24, -3, 15, -4, 13, 28, 10, 27, 8, 12, -2, 13, -2, 40, -4, 41, -5, 34, -18, 34, -19, 42, -22, 41, -22, 16, -24, 16, -24, 28, -27, 28, -29, 12, -29, -41, 15, -41, 15, -23, 25, -23, 25, -37 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 15, 3.5 )
+
+[sub_resource type="OccluderPolygon2D" id=39]
+polygon = PoolVector2Array( 4, 30, -5, 30, -6, 25, 4, 25 )
+
+[sub_resource type="Shader" id=30]
+code = "shader_type canvas_item;
+
+uniform float lod: hint_range(0.0, 5) = 0.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=31]
+shader = SubResource( 30 )
+shader_param/lod = 4.0
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 4.0, 4.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends ColorRect
+
+
+func _ready():
+	while color.a > 0:
+		color.a -= 0.01
+		yield(get_tree(), \"idle_frame\")
+	visible = false
+"
+
+[node name="Scene" type="Node2D"]
+
+[node name="back" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="back" type="Sprite" parent="back"]
+position = Vector2( -38, -30 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="back"]
+visible = false
+polygon = PoolVector2Array( 151, 29, 125, 29, 125, 20, 51, 21, 51, 31, -15, 31, -15, 19, -94, 19, -95, 3, -103, 3, -103, -50, -222, -49, -223, 90, 151, 89, 151, 30, 164, 30, 165, 105, -235, 108, -233, -73, 163, -70, 164, 29 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="back"]
+occluder = SubResource( 34 )
+
+[node name="audi_start" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 152, 56 )
+stream = ExtResource( 1 )
+autoplay = true
+max_distance = 500.0
+
+[node name="target" type="Node2D" parent="." groups=["minimap_object"]]
+position = Vector2( -172, -29 )
+script = SubResource( 29 )
+
+[node name="presentDrop" type="Area2D" parent="."]
+position = Vector2( -178, -22 )
+monitorable = false
+script = SubResource( 41 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="shape" type="CollisionShape2D" parent="presentDrop"]
+position = Vector2( 0.5, 0.5 )
+shape = SubResource( 40 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 98, 61 )
+default_land_material = "wood"
+present_path = NodePath("../Present")
+set_grenades_count = 0
+
+[node name="Present" parent="YSort" groups=["minimap_object"] instance=ExtResource( 4 )]
+position = Vector2( 11, 224 )
+
+[node name="table" type="StaticBody2D" parent="YSort"]
+position = Vector2( -192, 44 )
+
+[node name="Sprite" type="Sprite" parent="YSort/table"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 16 )
+
+[node name="shape" type="CollisionShape2D" parent="YSort/table"]
+position = Vector2( -8, -3 )
+shape = SubResource( 35 )
+
+[node name="shape2" type="CollisionShape2D" parent="YSort/table"]
+position = Vector2( -12.5, 33 )
+shape = SubResource( 36 )
+
+[node name="shape3" type="CollisionShape2D" parent="YSort/table"]
+position = Vector2( 22.5, -9 )
+shape = SubResource( 36 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="YSort/table"]
+occluder = SubResource( 37 )
+
+[node name="tree" type="StaticBody2D" parent="YSort"]
+position = Vector2( -178, -37 )
+scale = Vector2( 1.4, 1.4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="YSort/tree"]
+position = Vector2( -0.214279, -24.8571 )
+texture = ExtResource( 17 )
+
+[node name="Light2D" type="Light2D" parent="YSort/tree"]
+position = Vector2( -0.214279, -24.8571 )
+texture = ExtResource( 18 )
+energy = 0.8
+
+[node name="shape" type="CollisionShape2D" parent="YSort/tree"]
+position = Vector2( -0.214279, 0.64286 )
+shape = SubResource( 38 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="YSort/tree"]
+position = Vector2( -0.214279, -24.8571 )
+occluder = SubResource( 39 )
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="MiniMap" parent="Canvas" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -246.0
+margin_top = 1.0
+margin_right = -42.0
+margin_bottom = 157.0
+player_path = NodePath("../../YSort/Player")
+
+[node name="Label" type="Label" parent="Canvas/MiniMap"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -5.83331
+margin_top = -19.3333
+margin_right = 4.16669
+margin_bottom = -4.33334
+theme = ExtResource( 9 )
+text = "N"
+
+[node name="GrenadesCount" parent="Canvas" instance=ExtResource( 13 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -31.0
+margin_top = -52.0
+margin_right = -6.0
+margin_bottom = 2.0
+
+[node name="FlashlightIcon" parent="Canvas" instance=ExtResource( 14 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -34.0
+margin_top = -104.0
+margin_bottom = -53.0
+
+[node name="AfterGrenade" type="ColorRect" parent="Canvas"]
+visible = false
+material = SubResource( 31 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="TextureRect" parent="Canvas/AfterGrenade"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+expand = true
+
+[node name="audi" type="AudioStreamPlayer" parent="Canvas/AfterGrenade"]
+stream = ExtResource( 11 )
+
+[node name="anim" type="AnimationPlayer" parent="Canvas/AfterGrenade"]
+anims/RESET = SubResource( 32 )
+anims/show = SubResource( 33 )
+
+[node name="background" type="ColorRect" parent="Canvas"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+script = SubResource( 8 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.2, 0.2, 0.207843, 1 )
+
+[connection signal="body_entered" from="presentDrop" to="presentDrop" method="_on_presentDrop_body_entered"]
+[connection signal="body_exited" from="presentDrop" to="presentDrop" method="_on_presentDrop_body_exited"]
+[connection signal="drop_item" from="YSort/Player" to="presentDrop" method="_on_Player_drop_item"]
+[connection signal="animation_finished" from="Canvas/AfterGrenade/anim" to="Canvas/AfterGrenade" method="_on_anim_animation_finished"]

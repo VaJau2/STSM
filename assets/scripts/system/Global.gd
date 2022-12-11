@@ -8,6 +8,7 @@ var dialogue = null
 var player = null
 var current_scene = null
 var grenades_count: int = 8
+var reload_level: String = "Base"
 
 
 func _ready():

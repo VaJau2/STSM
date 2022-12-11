@@ -597,7 +597,8 @@ anims/tied = SubResource( 9 )
 anims/walk = SubResource( 8 )
 
 [node name="soundSteps" type="AudioStreamPlayer2D" parent="."]
-volume_db = 1.5
+volume_db = -20.0
+max_distance = 500.0
 script = ExtResource( 4 )
 stepsArray = {
 "dirt": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 21 ) ],
