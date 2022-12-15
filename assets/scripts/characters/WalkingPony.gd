@@ -6,7 +6,7 @@ extends Character
 
 class_name WalkingPony
 
-const STUN_TIME = 7
+const STUN_TIME = 8
 
 onready var agent = get_node("agent2d")
 export var speed = 80

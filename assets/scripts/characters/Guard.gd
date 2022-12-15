@@ -85,6 +85,7 @@ func set_state(new_state: int) -> void:
 			lasso_handler.set_item_on(true)
 	state = new_state
 
+
 func set_patrol_target() -> void:
 	if patrol_points.size() == 0: return
 	set_target(patrol_points[pointI].global_position)

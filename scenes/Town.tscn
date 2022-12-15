@@ -343,13 +343,9 @@ position = Vector2( 2429, -1308 )
 position = Vector2( 2340, -1694 )
 
 [node name="lights" type="Node2D" parent="YSort" groups=["sorting"]]
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
 
 [node name="lightspot2" parent="YSort/lights" instance=ExtResource( 20 )]
-position = Vector2( 1109, -993 )
+position = Vector2( 1050, -849 )
 
 [node name="lightspot3" parent="YSort/lights" instance=ExtResource( 20 )]
 position = Vector2( 1064, -1215 )

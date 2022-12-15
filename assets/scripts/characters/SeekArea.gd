@@ -55,7 +55,7 @@ func _process(_delta) -> void:
 			if !victim.is_running():
 				temp_see = false
 		checks.walking:
-			if victim.is_crouching():
+			if victim.is_crouching() || victim.velocity.length() == 0:
 				temp_see = false
 	if temp_see: set_see_player(true)
 	elif see_player: set_see_player(false)

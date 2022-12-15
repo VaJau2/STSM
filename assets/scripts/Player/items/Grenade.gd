@@ -2,7 +2,7 @@ extends RigidBody2D
 
 const AIR_FRICTION = 1.02
 const MIN_SPEED = 20
-const EXPLODE_TIME = 2
+const EXPLODE_TIME = 1.25
 const PLAYER_CHECK_STUN_DISTANCE = 65
 
 onready var ray: RayCast2D = get_node("ray")
