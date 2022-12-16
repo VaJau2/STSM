@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 	
 	if may_skip:
 		if Input.is_action_just_pressed("ui_flashlight"):
-			G.goto_scene("Base")
+			G.goto_scene("Road")
 
 
 func set_may_skip(on: bool) -> void:
