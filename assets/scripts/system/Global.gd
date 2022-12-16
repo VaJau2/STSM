@@ -8,6 +8,7 @@ var dialogue = null
 var player = null
 var current_scene = null
 var grenades_count: int = 8
+var loses_count: int = -1
 var reload_level: String = "Base"
 
 
@@ -49,7 +50,7 @@ func goto_scene(scene):
 	var background = get_node_or_null("/root/Scene/Canvas/background")
 	if background != null:
 		background.visible = true
-		while background.color.a < 1:
+		while is_instance_valid(background) && background.color.a < 1:
 			background.color.a += 0.01
 			yield(get_tree(), "idle_frame")
 	call_deferred("_deferred_goto_scene", "res://scenes/" + scene + ".tscn")

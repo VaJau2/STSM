@@ -22,7 +22,6 @@ code = "strikely"
 speed = 120
 run_speed = 200
 crouch_speed = 60
-acceleration = 800
 default_land_material = "snow"
 present_path = NodePath("")
 set_grenades_count = -1

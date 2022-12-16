@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/audio/items/lasso_throw.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 101.5, 40.5 )
+extents = Vector2( 92, 40.5 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 190.011
@@ -71,7 +71,7 @@ collision_mask = 3
 monitorable = false
 
 [node name="shape" type="CollisionShape2D" parent="seekArea/close" index="0"]
-position = Vector2( 80.5, -10.5 )
+position = Vector2( 90, -10.5 )
 shape = SubResource( 1 )
 
 [node name="walking" type="Area2D" parent="seekArea" index="1"]

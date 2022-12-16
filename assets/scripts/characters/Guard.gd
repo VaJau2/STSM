@@ -39,8 +39,15 @@ var may_interact: bool setget ,get_may_interact
 var is_tied: bool = false
 
 
+func set_search_position(search_position: Vector2) -> void:
+	if state == states.attack: return
+	seek_area.last_see_position = search_position
+	set_state(states.search)
+
+
 func get_may_interact() -> bool:
-	if !is_stunned: return false
+	if !is_stunned && state != states.idle: 
+		return false
 	if is_tied:
 		return !G.player.has_item && !G.player.tied
 	return true
@@ -55,6 +62,7 @@ func interact(player) -> void:
 	if is_tied:
 		player.pickup_item("guard", self)
 	else:
+		set_is_stunned(true)
 		change_animation("tied")
 		player.play_tie_sound()
 		is_tied = true
@@ -78,7 +86,7 @@ func set_state(new_state: int) -> void:
 			lasso_handler.set_item_on(false)
 			set_patrol_target()
 		states.search:
-			var last_see_pos = seek_area.victim_position
+			var last_see_pos = seek_area.last_see_position
 			set_target(last_see_pos)
 			wait_timer = rand_range(SEARCH_WAIT_TIME.MIN, SEARCH_WAIT_TIME.MAX)
 		states.attack:
@@ -126,26 +134,21 @@ func update_search(delta: float) -> void:
 
 
 func update_attack(delta: float) -> void:
-	update_victim_pos(delta)
-
-
-func update_victim_pos(delta: float) -> void:
 	if update_timer > 0:
 		update_timer -= delta
 	else:
-		set_target(seek_area.victim_position)
+		set_target(seek_area.player_position)
 		update_timer = UPDATE_POS_TIME
 
 
-func update_walk_velocity(dir: Vector2) -> void:
-	if state == states.attack:
-		var player_pos = seek_area.victim_position
-		var distance = global_position.distance_to(player_pos)
-		if distance >= RUN_DISTANCE:
-			velocity = dir * run_speed
+func update_velocity(dir: Vector2, delta: float) -> void:
+	if state == states.attack || state == states.search:
+		var distance = agent.distance_to_target()
+		if distance >= RUN_DISTANCE * (1 if state == states.attack else 2):
+			velocity = velocity.move_toward(dir * run_speed, acceleration * delta)
 			change_animation("run")
 			return
-	.update_walk_velocity(dir)
+	.update_velocity(dir, delta)
 
 
 func _ready() -> void:

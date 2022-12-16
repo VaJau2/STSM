@@ -4,6 +4,7 @@ const AIR_FRICTION = 1.02
 const MIN_SPEED = 20
 const EXPLODE_TIME = 1.25
 const PLAYER_CHECK_STUN_DISTANCE = 65
+const TRIGGER_DISTANCE = 500
 
 onready var ray: RayCast2D = get_node("ray")
 
@@ -20,11 +21,21 @@ func _integrate_forces(state) -> void:
 		state.angular_velocity = state.angular_velocity / AIR_FRICTION
 
 
+func trigger_guards():
+	var characters = get_tree().get_nodes_in_group("characters")
+	for character in characters:
+		if !character is Guard: continue
+		var distance = global_position.distance_to(character.global_position)
+		if distance > TRIGGER_DISTANCE: continue
+		character.set_search_position(global_position)
+
+
 func explode() -> void:
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	$audi.play()
 	$explode.visible = true
+	trigger_guards()
 	for victim in victims:
 		if may_stun_victim(victim): victim.stun()
 	yield(get_tree().create_timer(0.3), "timeout")
@@ -35,8 +46,8 @@ func may_stun_victim(victim: Character) -> bool:
 	if !raycast_see_victim(victim): return false
 	if victim.name == "Player":
 		var distance = global_position.distance_to(victim.global_position)
-		if distance < PLAYER_CHECK_STUN_DISTANCE: return true
-		
+		if distance < PLAYER_CHECK_STUN_DISTANCE: 
+			return true
 		if victim.global_position.x > global_position.x:
 			return victim.flip_x
 		else:

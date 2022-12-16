@@ -7,7 +7,6 @@ extends Character
 export var speed = 120
 export var run_speed = 200
 export var crouch_speed = 60
-export var acceleration = 800
 export var default_land_material = "snow"
 export var present_path: NodePath
 export var set_grenades_count: int = -1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/base-walls.tres" type="TileSet" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/scripts/player/items/AfterGrenadeEffect.gd" type="Script" id=19]
 [ext_resource path="res://objects/background/lightspot.tscn" type="PackedScene" id=20]
 [ext_resource path="res://objects/items/Present.tscn" type="PackedScene" id=21]
+[ext_resource path="res://objects/background/trap.tscn" type="PackedScene" id=22]
 [ext_resource path="res://objects/background/buildings/house1.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/scripts/furniture/YSortUngrouping.gd" type="Script" id=24]
 [ext_resource path="res://objects/background/buildings/house2.tscn" type="PackedScene" id=25]
@@ -227,6 +228,29 @@ position = Vector2( 992, -1175 )
 [node name="7" type="Node2D" parent="patrol_points"]
 position = Vector2( 990, -1459 )
 
+[node name="traps" type="Node2D" parent="."]
+
+[node name="trap" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1229, -790 )
+
+[node name="trap2" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1511, -1058 )
+
+[node name="trap3" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1755, -1300 )
+
+[node name="trap4" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1793, -1834 )
+
+[node name="trap5" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1964, -1955 )
+
+[node name="trap6" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1765, -1958 )
+
+[node name="trap7" parent="traps" instance=ExtResource( 22 )]
+position = Vector2( 1567, -1919 )
+
 [node name="steps_parent" type="Node2D" parent="."]
 
 [node name="target" type="Node2D" parent="." groups=["minimap_object"]]
@@ -343,6 +367,10 @@ position = Vector2( 2429, -1308 )
 position = Vector2( 2340, -1694 )
 
 [node name="lights" type="Node2D" parent="YSort" groups=["sorting"]]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="lightspot2" parent="YSort/lights" instance=ExtResource( 20 )]
 position = Vector2( 1050, -849 )

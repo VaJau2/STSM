@@ -60,10 +60,10 @@ func _process(delta: float) -> void:
 		return
 	
 	if parent.state != parent.states.attack: return
-	if parent.is_stunned: return
+	if parent.is_stunned || parent.is_tied: return
 	if parent.player_is_tied(): return
 	
-	var victim_pos = parent.seek_area.victim_position
+	var victim_pos = G.player.global_position
 	var distance = global_position.distance_to(victim_pos)
 	if distance > THROW_DISTANCE: return
 	

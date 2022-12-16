@@ -1,10 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/materials/fonts/pixel-big-theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/materials/fonts/pixel-big-color-theme.tres" type="Theme" id=2]
+[ext_resource path="res://assets/sprites/losing/0.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
+
+const MAX_LOSES_COUNT = 7
+
+
+func _ready():
+	if G.loses_count < MAX_LOSES_COUNT:
+		G.loses_count += 1
+	var path = \"res://assets/sprites/losing/\" + str(G.loses_count) + \".png\"
+	$CanvasLayer/strikely.texture = load(path)
 
 
 func _process(_delta: float) -> void:
@@ -23,9 +33,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -120.0
-margin_top = -65.0
+margin_top = -226.0
 margin_right = 120.0
-margin_bottom = -43.0
+margin_bottom = -209.0
 theme = ExtResource( 2 )
 text = "вы успешно проиграли"
 
@@ -35,8 +45,20 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -210.0
-margin_top = -8.5
+margin_top = 219.0
 margin_right = 210.0
-margin_bottom = 8.5
+margin_bottom = 237.0
 theme = ExtResource( 1 )
 text = "Нажмите пробел, чтобы начать заново"
+
+[node name="strikely" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -141.0
+margin_top = -175.5
+margin_right = 141.0
+margin_bottom = 175.5
+texture = ExtResource( 3 )
+stretch_mode = 5

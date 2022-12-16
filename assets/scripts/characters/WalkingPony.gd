@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 			set_is_stunned(false)
 		
 	if has_target:
-		update_moving()
+		update_moving(delta)
 
 
 func set_target(target: Vector2) -> void:
@@ -50,26 +50,26 @@ func stun() -> void:
 	set_is_stunned(true)
 
 
-func update_moving() -> void:
+func update_moving(delta: float) -> void:
 	if !may_move: 
 		velocity = Vector2.ZERO
 		return
 	
 	if agent.is_navigation_finished():
-		change_animation("idle")
 		emit_signal("arrived")
 		velocity = Vector2.ZERO
+		change_animation("idle")
 		has_target = false
 	else:
 		var move_dir = position.direction_to(agent.get_next_location())
-		update_walk_velocity(move_dir)
+		update_velocity(move_dir, delta)
 		agent.set_velocity(velocity)
 		look_at_direction(move_dir)
 
 
-func update_walk_velocity(dir: Vector2) -> void:
-	velocity = dir * speed
-	change_animation("walk")
+func update_velocity(dir: Vector2, delta: float) -> void:
+	velocity = velocity.move_toward(dir * speed, acceleration * delta)
+	change_animation("walk" if dir.length() > 0 else "idle")
 
 
 func look_at_direction(direction: Vector2):
