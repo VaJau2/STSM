@@ -13,6 +13,7 @@ const WALK_CHANCE = 0.5
 export (Array, NodePath) var random_points_path
 export var idle_animations: PoolStringArray
 export var dialogue_codes: PoolStringArray
+export var random_dialogues: bool = false
 export var minimap_icon: String = "animal"
 
 var may_interact: bool setget , is_may_interact
@@ -28,7 +29,8 @@ func _ready() -> void:
 		random_points.append(get_node(point_path))
 	get_new_state()
 	temp_dialogues = dialogue_codes
-	temp_dialogues.shuffle()
+	if random_dialogues:
+		temp_dialogues.shuffle()
 
 
 func set_is_stunned(value: bool) -> void:
