@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow_road.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://objects/tilemaps/mountains.tres" type="TileSet" id=31]
 [ext_resource path="res://objects/background/trap.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/sprites/background/house/girlanda.png" type="Texture" id=33]
+[ext_resource path="res://objects/interface/PauseMenu.tscn" type="PackedScene" id=34]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 214, 33 )
@@ -781,7 +782,6 @@ __meta__ = {
 }
 
 [node name="Canvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="DialogueMenu" parent="Canvas" instance=ExtResource( 13 )]
 
@@ -843,6 +843,8 @@ stream = ExtResource( 25 )
 [node name="anim" type="AnimationPlayer" parent="Canvas/AfterGrenade"]
 anims/RESET = SubResource( 32 )
 anims/show = SubResource( 33 )
+
+[node name="PauseMenu" parent="Canvas" instance=ExtResource( 34 )]
 
 [node name="background" type="ColorRect" parent="Canvas"]
 anchor_right = 1.0

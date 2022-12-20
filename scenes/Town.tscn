@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://objects/tilemaps/snow.tres" type="TileSet" id=1]
 [ext_resource path="res://objects/tilemaps/base-walls.tres" type="TileSet" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://objects/background/buildings/house1.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/scripts/furniture/YSortUngrouping.gd" type="Script" id=24]
 [ext_resource path="res://objects/background/buildings/house2.tscn" type="PackedScene" id=25]
+[ext_resource path="res://objects/interface/PauseMenu.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 909.5 )
@@ -520,6 +521,8 @@ stream = ExtResource( 9 )
 [node name="anim" type="AnimationPlayer" parent="Canvas/AfterGrenade"]
 anims/RESET = SubResource( 32 )
 anims/show = SubResource( 33 )
+
+[node name="PauseMenu" parent="Canvas" instance=ExtResource( 26 )]
 
 [node name="background" type="ColorRect" parent="Canvas"]
 visible = false
