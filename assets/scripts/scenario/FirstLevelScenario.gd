@@ -1,5 +1,7 @@
 extends Node
 
+const NEXT_LEVEL = "Road"
+
 onready var start_label = get_node("../Canvas/StartLabel")
 onready var skip_label = get_node("../Canvas/SkipLabel")
 onready var timer = get_node("Timer")
@@ -40,7 +42,7 @@ func _process(_delta: float) -> void:
 	
 	if may_skip:
 		if Input.is_action_just_pressed("ui_flashlight"):
-			G.goto_scene("Road")
+			G.goto_scene(NEXT_LEVEL)
 
 
 func set_may_skip(on: bool) -> void:
@@ -107,4 +109,4 @@ func start_game() -> void:
 	#переход на следующую сцену
 	timer.start(2)
 	yield(timer, "timeout")
-	G.goto_scene("Road")
+	G.goto_scene(NEXT_LEVEL)

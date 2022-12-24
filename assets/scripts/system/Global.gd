@@ -7,9 +7,9 @@ extends Node
 var dialogue = null
 var player = null
 var current_scene = null
-var grenades_count: int = 8
+var grenades_count: int = 10
 var loses_count: int = -1
-var reload_level: String = "Base"
+var reload_level: String = "Forest"
 
 
 func _ready():

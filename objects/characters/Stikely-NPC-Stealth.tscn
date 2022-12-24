@@ -7,10 +7,9 @@
 [node name="Strikely" instance=ExtResource( 1 )]
 code = "strikely"
 speed = 90
-start_animation = "idle"
 
-[node name="sprite" parent="." index="1"]
+[node name="sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 
-[node name="mouth" parent="." index="2"]
+[node name="mouth" parent="." index="3"]
 texture = ExtResource( 3 )

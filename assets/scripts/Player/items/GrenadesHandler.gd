@@ -33,7 +33,6 @@ func _ready() -> void:
 		return
 	audi = get_node(audi_path)
 	set_on(false)
-	yield(get_tree(), "idle_frame")
 	show_grenades_count()
 
 

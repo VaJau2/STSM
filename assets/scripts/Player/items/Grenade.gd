@@ -9,6 +9,8 @@ const TRIGGER_DISTANCE = 500
 onready var ray: RayCast2D = get_node("ray")
 
 var timer: float
+var collision_cooldown: float = 0.1
+var collision_off: bool = true
 var victims: Array
 
 
@@ -67,6 +69,13 @@ func raycast_see_victim(victim: Character) -> bool:
 
 
 func _process(delta: float) -> void:
+	if collision_cooldown > 0:
+		collision_cooldown -= delta
+	else:
+		if collision_off:
+			$shape.disabled = false
+			collision_off = false
+	
 	if timer < EXPLODE_TIME:
 		timer += delta
 	else:

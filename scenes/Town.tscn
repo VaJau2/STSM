@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/scripts/furniture/YSortUngrouping.gd" type="Script" id=24]
 [ext_resource path="res://objects/background/buildings/house2.tscn" type="PackedScene" id=25]
 [ext_resource path="res://objects/interface/PauseMenu.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/scripts/interface/FadingBackground.tres.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.5, 909.5 )
@@ -125,17 +126,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="GDScript" id=8]
-script/source = "extends ColorRect
-
-
-func _ready():
-	while color.a > 0:
-		color.a -= 0.01
-		yield(get_tree(), \"idle_frame\")
-	visible = false
-"
 
 [sub_resource type="GDScript" id=35]
 script/source = "extends Node
@@ -438,6 +428,10 @@ patrol_points_path = [ NodePath("../../../patrol_points/3"), NodePath("../../../
 position = Vector2( 1319, -1339 )
 patrol_points_path = [ NodePath("../../../patrol_points/4"), NodePath("../../../patrol_points/5"), NodePath("../../../patrol_points/6"), NodePath("../../../patrol_points/7") ]
 
+[node name="Guard4" parent="YSort/guards" instance=ExtResource( 12 )]
+position = Vector2( 2087, -2108 )
+patrol_points_path = [ NodePath("../../../patrol_points/3"), NodePath("../../../patrol_points/2") ]
+
 [node name="exit" type="StaticBody2D" parent="YSort"]
 position = Vector2( 1886, -2152 )
 collision_layer = 2
@@ -529,7 +523,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
-script = SubResource( 8 )
+script = ExtResource( 27 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.2, 0.2, 0.207843, 1 )
