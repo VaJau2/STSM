@@ -47,12 +47,6 @@ func find_character(code: String) -> Character:
 
 
 func goto_scene(scene):
-	var background = get_node_or_null("/root/Scene/Canvas/background")
-	if background != null:
-		background.visible = true
-		while is_instance_valid(background) && background.color.a < 1:
-			background.color.a += 0.01
-			yield(get_tree(), "idle_frame")
 	call_deferred("_deferred_goto_scene", "res://scenes/" + scene + ".tscn")
 
 

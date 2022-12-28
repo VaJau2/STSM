@@ -15,17 +15,19 @@ var dir = Vector2()
 var tied = false
 var is_in_dialogue = false
 
-onready var interaction = get_node("interaction")
-onready var states: PlayerStates = get_node("states")
 onready var grenade_effects = get_node_or_null("/root/Scene/Canvas/AfterGrenade")
+onready var background = get_node("/root/Scene/Canvas/background")
 onready var grenades_handler = get_node("grenades_spot")
+onready var states: PlayerStates = get_node("states")
 onready var pickable_item = get_node("pickableItem")
+onready var interaction = get_node("interaction")
 
 var has_item: bool = false
 var has_present: bool = false
 
 #warning-ignore:unused_signal
 signal drop_item
+signal is_tied
 
 
 func save_to_global() -> void:
@@ -44,11 +46,12 @@ func play_tie_sound() -> void:
 
 
 func tie() -> void:
+	emit_signal("is_tied")
 	states.set_tied()
 	tied = true
 	play_tie_sound()
 	yield(get_tree().create_timer(2), "timeout")
-	G.goto_scene("Lose")
+	background.animate_exit("Lose")
 
 
 func stun():

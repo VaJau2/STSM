@@ -24,6 +24,7 @@ export var run_speed = 150
 
 onready var lasso_handler = get_node("lassoHandler")
 onready var seek_area = get_node("seekArea")
+onready var phrases = get_node("phrase")
 
 var minimap_icon: String = "enemy"
 
@@ -56,16 +57,22 @@ func get_may_interact() -> bool:
 func untie() -> void:
 	is_tied = false
 	may_move = true
+	phrases.say("untied", 0.8)
 
 
 func interact(player) -> void:
 	if is_tied:
 		player.pickup_item("guard", self)
 	else:
+		phrases.say("fail", 0.7)
 		set_is_stunned(true)
 		change_animation("tied")
 		player.play_tie_sound()
 		is_tied = true
+
+
+func drop() -> void:
+	phrases.say("drop", 0.6)
 
 
 func player_is_tied() -> bool:
@@ -78,19 +85,24 @@ func set_is_stunned(value: bool) -> void:
 	.set_is_stunned(value)
 	var new_anim = "stunned" if value else "idle"
 	change_animation(new_anim)
+	if value:
+		phrases.say("stun", 0.4)
 
 
 func set_state(new_state: int) -> void:
+	if state == new_state: return
 	match new_state:
 		states.idle:
 			lasso_handler.set_item_on(false)
 			set_patrol_target()
+			phrases.say("idle", 0.2)
 		states.search:
 			var last_see_pos = seek_area.last_see_position
 			set_target(last_see_pos)
 			wait_timer = rand_range(SEARCH_WAIT_TIME.MIN, SEARCH_WAIT_TIME.MAX)
 		states.attack:
 			lasso_handler.set_item_on(true)
+			phrases.say("attack", 0.2)
 	state = new_state
 
 
@@ -112,6 +124,7 @@ func update_patrol(delta: float) -> void:
 		wait_timer -= delta
 	else:
 		set_patrol_target()
+		phrases.say("patrol", 0.2)
 
 
 func has_tied_ally() -> bool:
@@ -123,6 +136,15 @@ func has_tied_ally() -> bool:
 			set_target(temp_ally.global_position)
 		return true
 	return false
+
+
+func set_flip_x(flip_on: bool) -> void:
+	.set_flip_x(flip_on)
+	if flip_x:
+		phrases.scale.x = phrases.scale.y * -1
+	else:
+		phrases.scale.x = phrases.scale.y * 1
+
 
 
 func update_search(delta: float) -> void:
@@ -173,4 +195,5 @@ func _process(delta: float) -> void:
 func _on_untie_area_body_entered(body):
 	if is_tied: return
 	if !body.has_method("untie") || !body.is_tied: return
+	phrases.say("untie", 0.7)
 	body.untie()

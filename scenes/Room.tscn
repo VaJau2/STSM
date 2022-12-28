@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/materials/fonts/pixel-big-theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/sprites/background/house/room_walls.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/audio/music/The Chordettes - Mr. Sandman.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/audio/music/The Chordettes - Mr. Sandman - lowered.mp3" type="AudioStream" id=20]
 [ext_resource path="res://assets/materials/fonts/pixel-theme.tres" type="Theme" id=21]
+[ext_resource path="res://assets/scripts/interface/FadingBackground.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 124.5 )
@@ -283,6 +284,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
+script = ExtResource( 22 )
 
 [node name="Scenario" type="Node" parent="."]
 script = ExtResource( 12 )

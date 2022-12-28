@@ -1,5 +1,11 @@
 extends RigidBody2D
 
+#--------------------------------
+# Класс гранаты
+# Отскакивает от коллизии и взрывается через время
+#--------------------------------
+
+
 const AIR_FRICTION = 1.02
 const MIN_SPEED = 20
 const EXPLODE_TIME = 1.25
@@ -23,7 +29,7 @@ func _integrate_forces(state) -> void:
 		state.angular_velocity = state.angular_velocity / AIR_FRICTION
 
 
-func trigger_guards():
+func trigger_guards() -> void:
 	var characters = get_tree().get_nodes_in_group("characters")
 	for character in characters:
 		if !character is Guard: continue

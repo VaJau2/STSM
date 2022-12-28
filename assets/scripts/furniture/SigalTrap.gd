@@ -17,7 +17,7 @@ var may_interact: bool setget ,get_may_interact
 
 
 func get_may_interact() -> bool:
-	return G.player.is_crouching()
+	return !done && G.player.is_crouching()
 
 
 func interact(_player) -> void:

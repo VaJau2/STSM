@@ -32,7 +32,7 @@
 [ext_resource path="res://assets/sprites/interface/after_grenade.png" type="Texture" id=30]
 [ext_resource path="res://assets/audio/items/grenade_close.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/scripts/player/ExitWithPresent.gd" type="Script" id=32]
-[ext_resource path="res://assets/scripts/interface/FadingBackground.tres.gd" type="Script" id=33]
+[ext_resource path="res://assets/scripts/interface/FadingBackground.gd" type="Script" id=33]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 214, 33 )
@@ -796,4 +796,5 @@ color = Color( 0.2, 0.2, 0.207843, 1 )
 [connection signal="body_exited" from="materials/road" to="materials/road" method="_on_body_exited"]
 [connection signal="body_entered" from="materials/ice" to="materials/ice" method="_on_body_entered"]
 [connection signal="body_exited" from="materials/ice" to="materials/ice" method="_on_body_exited"]
+[connection signal="is_tied" from="YSort/Player" to="YSort/exit" method="_on_Player_is_tied"]
 [connection signal="animation_finished" from="Canvas/AfterGrenade/anim" to="Canvas/AfterGrenade" method="_on_anim_animation_finished"]

@@ -51,6 +51,7 @@ func raycast_see_player() -> bool:
 
 func _process(_delta) -> void:
 	if check == checks.none: return
+	if parent.is_tied: return
 	var temp_see = raycast_see_player()
 	var player = G.player
 	match check:

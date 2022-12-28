@@ -28,7 +28,7 @@ func set_config(code) -> void:
 	saved_configs[code] = new_config
 	
 	if saved_configs.size() > MAX_SAVED_CONFIGS:
-		var keys_size =  saved_configs.keys().size
+		var keys_size = saved_configs.keys().size()
 		var last_key = saved_configs.keys()[keys_size - 1]
 		saved_configs.erase(last_key)
 
@@ -52,7 +52,7 @@ func choose_sound(symbol) -> void:
 	var min_pitch_int = int(config.min_pitch * 100)
 	var max_pitch_int = int(config.max_pitch * 100)
 	var pitch_range = max_pitch_int - min_pitch_int
-	if pitch_scale != 0:
+	if pitch_range != 0:
 		var temp_pitch = (temp_hash % pitch_range) + min_pitch_int
 		pitch_scale = temp_pitch / 100.0
 	else:

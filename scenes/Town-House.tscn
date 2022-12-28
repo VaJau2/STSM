@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprites/background/town-house/town-house-back.png" type="Texture" id=2]
 [ext_resource path="res://objects/characters/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/items/Present.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/scripts/interface/FadingBackground.tres.gd" type="Script" id=5]
+[ext_resource path="res://assets/scripts/interface/FadingBackground.gd" type="Script" id=5]
 [ext_resource path="res://assets/scripts/player/items/AfterGrenadeEffect.gd" type="Script" id=8]
 [ext_resource path="res://assets/materials/fonts/pixel-theme.tres" type="Theme" id=9]
 [ext_resource path="res://assets/sprites/interface/after_grenade.png" type="Texture" id=10]
@@ -29,6 +29,7 @@ var minimap_icon = \"mission\"
 [sub_resource type="GDScript" id=41]
 script/source = "extends Area2D
 
+onready var background = get_node(\"/root/Scene/Canvas/background\")
 var player_here: bool = false
 
 
@@ -43,7 +44,7 @@ func _on_presentDrop_body_exited(body):
 func _on_Player_drop_item():
 	if player_here:
 		get_node(\"../YSort/Present\").interactable = false
-		G.goto_scene(\"Final\")
+		background.animate_exit(\"Final\")
 
 
 "
@@ -295,7 +296,6 @@ anims/RESET = SubResource( 32 )
 anims/show = SubResource( 33 )
 
 [node name="background" type="ColorRect" parent="Canvas"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )

@@ -32,6 +32,8 @@ func _on_states_changed():
 	var new_pos = get_parent().global_position
 	new_pos.y += 10
 	temp_item.global_position = new_pos
+	if temp_item.has_method("drop"):
+		temp_item.drop()
 	temp_item = null
 	visible = false
 	player.has_item = false
