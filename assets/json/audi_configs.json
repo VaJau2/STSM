@@ -50,5 +50,13 @@
 		"min_pitch": "0.7",
 		"max_pitch": "1",
 		"chars_to_sound": "4",
+	},
+	"boop": {
+		"sounds": {
+			"0": "boop/boop.wav",
+		},
+		"min_pitch": "1",
+		"max_pitch": "1",
+		"chars_to_sound": "1",
 	}
 }
